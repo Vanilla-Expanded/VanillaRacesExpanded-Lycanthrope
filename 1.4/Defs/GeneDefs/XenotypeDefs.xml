@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<XenotypeDef>
+		<defName>VRE_Lycan</defName>
+		<label>lycan</label>
+		<description>todo.</description>
+		<descriptionShort>todo.</descriptionShort>
+		<iconPath>VCEF_AlphaFish_a</iconPath>
+		<inheritable>false</inheritable>
+		<genes>
+			
+			
+	
+			
+		</genes>
+	</XenotypeDef>
+</Defs>
