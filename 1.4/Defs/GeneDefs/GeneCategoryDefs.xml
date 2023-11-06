@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneCategoryDef>
+		<defName>VRE_Morphs</defName>
+		<label>morphs</label>
+		<displayPriorityInXenotype>999.671</displayPriorityInXenotype>
+	</GeneCategoryDef>
+</Defs>

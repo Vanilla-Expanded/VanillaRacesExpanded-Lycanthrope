@@ -10,5 +10,17 @@ namespace VanillaRacesExpandedLycanthrope
             if (pawn.genes is null) return false;
             return pawn.genes.GetGene(geneDef)?.Active ?? false;
         }
+
+        public static bool XenotypeContainsGene(XenotypeDef xenotype, GeneDef geneDef)
+        {
+            foreach(GeneDef gene in xenotype.AllGenes)
+            {
+                if(gene == geneDef)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

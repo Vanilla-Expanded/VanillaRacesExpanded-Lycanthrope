@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using Verse;
+﻿using HarmonyLib;
 using RimWorld;
-using HarmonyLib;
 using System.Reflection;
+using Verse;
+using System.Reflection.Emit;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+using System;
+using Verse.AI;
+using RimWorld.Planet;
+
+
 
 namespace VanillaRacesExpandedLycanthrope
 {
 
-    //Setting the Harmony instance
-    [StaticConstructorOnStartup]
-    public class Main
+    public class VanillaRacesExpandedLycanthrope : Mod
     {
-        static Main()
+        public VanillaRacesExpandedLycanthrope(ModContentPack content) : base(content)
         {
-            var harmony = new Harmony("com.VELycanthropes");
+            var harmony = new Harmony("com.vrelycans");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
-
-
     }
 
 }
+

@@ -11,6 +11,9 @@ namespace VanillaRacesExpandedLycanthrope
     [DefOf]
     public static class InternalDefOf
     {
+
+        public static MorphGeneTemplateDef VRE_Morphs;
+
         static InternalDefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(InternalDefOf));
