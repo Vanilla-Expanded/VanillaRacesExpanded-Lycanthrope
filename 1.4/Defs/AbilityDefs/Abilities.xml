@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<AbilityDef ParentName="AG_NoTargetAbilities">
-		<defName>AG_MinorSummon</defName>
-		<label>minor summon</label>
+
+
+
+	<AbilityDef>
+		<defName>VRE_Morph</defName>
+		<label>morph</label>
 		<cooldownTicksRange>60000</cooldownTicksRange>
-		<description>Summon a creature that will stay around for a short period. It will be hostile to any targets hostile to the caster.</description>
-		<iconPath>UI/Abilities/AG_Summon</iconPath>
+		<description>Morph into a different xenotype.</description>
+		<iconPath>UI/Icons/Genes/Gene_Morph</iconPath>
 		<aiCanUse>true</aiCanUse>
+		<jobDef>CastAbilityOnThing</jobDef>
+		<targetRequired>False</targetRequired>
+		<canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<showPsycastEffects>False</showPsycastEffects>
+		<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+		<hotKey>Misc12</hotKey>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<drawAimPie>False</drawAimPie>
+			<requireLineOfSight>False</requireLineOfSight>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetAnimals>false</canTargetAnimals>
+				<canTargetHumans>false</canTargetHumans>
+				<canTargetMechs>false</canTargetMechs>
+			</targetParams>
+		</verbProperties>
 		<comps>
-			<li Class="AlphaGenes.CompProperties_AbilitySummon">
+			<li Class="VanillaRacesExpandedLycanthrope.CompProperties_AbilityMorph">
 				
 			</li>
 		</comps>
 	</AbilityDef>
+	
+	
 	
 </Defs>

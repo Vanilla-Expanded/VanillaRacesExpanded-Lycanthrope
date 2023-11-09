@@ -13,7 +13,7 @@
 		<biostatCpx>3</biostatCpx>
 		<biostatMet>-3</biostatMet>
 		<biostatArc>1</biostatArc>
-		<!--<ability>VRE_Morph</ability>-->
+		<ability>VRE_Morph</ability>
 	</VanillaRacesExpandedLycanthrope.MorphGeneTemplateDef>
 	
 </Defs>

@@ -54,7 +54,7 @@ namespace VanillaRacesExpandedLycanthrope
 
             GeneDef geneDef = new GeneDef
             {
-                defName = template.defName +"_" + def.defName,
+                defName = template.defName + "_" + def.defName,
                 geneClass = template.geneClass,
                 label = template.label.Formatted(def.label),
                 iconPath = def.iconPath,
@@ -70,7 +70,8 @@ namespace VanillaRacesExpandedLycanthrope
                 modContentPack = template.modContentPack,
                 modExtensions = new List<DefModExtension> {
                     new VanillaGenesExpanded.GeneExtension {
-                        backgroundPathArchite = "UI/Icons/Genes/GeneBackground_MorphGene"
+                        backgroundPathArchite = "UI/Icons/Genes/GeneBackground_MorphGene",
+                        hediffToWholeBody = InternalDefOf.VRE_MorphModifications
                       
                        
                     },
@@ -79,7 +80,7 @@ namespace VanillaRacesExpandedLycanthrope
                     }
                 },
 
-                //abilities = new List<AbilityDef> { template.ability },
+                abilities = new List<AbilityDef> { template.ability },
                 descriptionHyperlinks = new List<DefHyperlink> { new DefHyperlink { def = template.ability } }
             };
 

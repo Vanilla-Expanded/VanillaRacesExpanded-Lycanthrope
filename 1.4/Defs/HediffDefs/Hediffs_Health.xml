@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+	<HediffDef>
+		<defName>VRE_Morphed</defName>
+		<label>morphed</label>
+		<description>Morphed into a different xenotype.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<scenarioCanAdd>false</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		<comps>
+			
+			<li Class="VanillaRacesExpandedLycanthrope.HediffCompProperties_Morphed">
+				
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<becomeVisible>false</becomeVisible>
+			</li>
+		</stages>
+	</HediffDef>
+	
+	
+	<HediffDef>
+		<defName>VRE_MorphModifications</defName>
+		<label>morph modifications</label>
+		<description>Stores a list of genes. This is not visible to the player.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<scenarioCanAdd>false</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		<comps>
+		
+			<li Class="VanillaRacesExpandedLycanthrope.HediffCompProperties_MorphModifications">
+				
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<becomeVisible>false</becomeVisible>
+			</li>
+		</stages>
+	</HediffDef>
+	
+	
+	
+</Defs>
