@@ -18,8 +18,13 @@ namespace VanillaRacesExpandedLycanthrope
 
         private new CompProperties_AbilityMorph Props => (CompProperties_AbilityMorph)props;
 
+        List<Gene> morphedGenesToMaintain;
 
-
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Collections.Look(ref morphedGenesToMaintain, "morphedGenesToMaintain");
+        }
 
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
@@ -31,21 +36,26 @@ namespace VanillaRacesExpandedLycanthrope
 
             List<Gene> genes = pawn.genes?.GenesListForReading;
             XenotypeDef xenotype = null;
-            Gene morphGeneToMaintain = null;
+            morphedGenesToMaintain = new List<Gene>();
 
             if (genes != null)
             {
                 foreach (Gene gene in genes)
                 {
-                    if (gene.def.defName.Contains("VRE_Morphs") && gene.Active)
+                    if (gene.def.defName.Contains("VRE_Morphs"))
                     {
-                        MorphGeneDefExtension extension = gene.def.GetModExtension<MorphGeneDefExtension>();
-                        if (extension != null)
+                        if (gene.Active)
                         {
-                            morphGeneToMaintain = gene;
-                            xenotype = extension.xenotype;
-                            break;
+                            MorphGeneDefExtension extension = gene.def.GetModExtension<MorphGeneDefExtension>();
+                            if (extension != null)
+                            {
+                                morphedGenesToMaintain.Add(gene);
+                                xenotype = extension.xenotype;
+                                
+                            }
                         }
+                        else morphedGenesToMaintain.Add(gene);
+
 
                     }
 
@@ -81,7 +91,7 @@ namespace VanillaRacesExpandedLycanthrope
                 {
                     foreach (Gene gene in pawn.genes?.GenesListForReading)
                     {
-                        if (gene != morphGeneToMaintain) { pawn.genes?.RemoveGene(gene); }
+                        if (!morphedGenesToMaintain.Contains(gene)) { pawn.genes?.RemoveGene(gene); }
 
                     }
                 }
@@ -145,7 +155,7 @@ namespace VanillaRacesExpandedLycanthrope
                 {
                     foreach (Gene gene in pawn.genes?.GenesListForReading)
                     {
-                        if (gene != morphGeneToMaintain) { pawn.genes?.RemoveGene(gene); }
+                        if (!morphedGenesToMaintain.Contains(gene)) { pawn.genes?.RemoveGene(gene); }
                     }
                 }
                 if (comp.endogenes.Count > 0)
