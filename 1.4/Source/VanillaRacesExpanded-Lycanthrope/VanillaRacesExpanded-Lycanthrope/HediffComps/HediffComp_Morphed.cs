@@ -24,8 +24,8 @@ namespace VanillaRacesExpandedLycanthrope
         public override void CompExposeData()
         {
             base.CompExposeData();
-            Scribe_Collections.Look(ref this.endogenes, nameof(this.endogenes));
-            Scribe_Collections.Look(ref this.xenogenes, nameof(this.xenogenes));
+            Scribe_Collections.Look(ref this.endogenes, nameof(this.endogenes),LookMode.Def);
+            Scribe_Collections.Look(ref this.xenogenes, nameof(this.xenogenes), LookMode.Def);
             Scribe_Values.Look(ref this.xenotypeName, nameof(this.xenotypeName));
             Scribe_Defs.Look(ref this.xenotypeicon, nameof(this.xenotypeicon));
 
