@@ -14,10 +14,15 @@ namespace VanillaRacesExpandedLycanthrope
 
         public static HediffDef VRE_Morphed;
         public static HediffDef VRE_MorphModifications;
+
         public static MorphGeneTemplateDef VRE_Morphs;
 
         public static AbilityDef VRE_Morph;
 
+        public static GeneDef VRE_Morphs_NocturnalMorphing;
+        public static GeneDef VRE_Morphs_AdulthoodMorphing;
+        public static GeneDef VRE_Morphs_SeasonalMorphing;
+        public static GeneDef VRE_Morphs_DamageMorphing;
 
         static InternalDefOf()
         {

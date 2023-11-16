@@ -16,14 +16,36 @@ namespace VanillaRacesExpandedLycanthrope
     public class CompAbilityEffect_Morph : CompAbilityEffect
     {
 
+        public List<GeneDef> morphConditionGenes = new List<GeneDef>() { InternalDefOf.VRE_Morphs_AdulthoodMorphing,InternalDefOf.VRE_Morphs_NocturnalMorphing,
+        InternalDefOf.VRE_Morphs_SeasonalMorphing,InternalDefOf.VRE_Morphs_DamageMorphing};
+
         private new CompProperties_AbilityMorph Props => (CompProperties_AbilityMorph)props;
+
+        public bool MorphConditionSwitch = false;
 
         List<Gene> morphedGenesToMaintain;
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Collections.Look(ref morphedGenesToMaintain, "morphedGenesToMaintain");
+            Scribe_Collections.Look<Gene>(ref morphedGenesToMaintain, "morphedGenesToMaintain",LookMode.Deep);
+            Scribe_Values.Look(ref MorphConditionSwitch, "MorphConditionSwitch");
+        }
+
+        public override bool ShouldHideGizmo
+        {
+            get
+            {
+                foreach (GeneDef gene in morphConditionGenes)
+                {
+                    if (this.parent.pawn.HasActiveGene(gene))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
         }
 
 
@@ -46,12 +68,11 @@ namespace VanillaRacesExpandedLycanthrope
                     {
                         if (gene.Active)
                         {
+                            morphedGenesToMaintain.Add(gene);
                             MorphGeneDefExtension extension = gene.def.GetModExtension<MorphGeneDefExtension>();
                             if (extension != null)
-                            {
-                                morphedGenesToMaintain.Add(gene);
+                            {                            
                                 xenotype = extension.xenotype;
-                                
                             }
                         }
                         else morphedGenesToMaintain.Add(gene);
@@ -75,11 +96,15 @@ namespace VanillaRacesExpandedLycanthrope
 
                 foreach (Gene gene in pawn.genes.Endogenes)
                 {
-                    endogenes.Add(gene.def);
+                    if (!morphedGenesToMaintain.Contains(gene)) { endogenes.Add(gene.def); }
+                        
                 }
                 foreach (Gene gene in pawn.genes.Xenogenes)
                 {
-                    xenogenes.Add(gene.def);
+                    if (!morphedGenesToMaintain.Contains(gene))
+                    {
+                        xenogenes.Add(gene.def);
+                    }
                 }
 
                 comp.endogenes = endogenes;
@@ -132,7 +157,7 @@ namespace VanillaRacesExpandedLycanthrope
 
                 foreach (Gene gene in pawn.genes.Endogenes)
                 {
-                    if (!xenotype.AllGenes.Contains(gene.def))
+                    if (!xenotype.AllGenes.Contains(gene.def)&&!morphedGenesToMaintain.Contains(gene))
                     {
                         modifiedEndogenes.Add(gene.def);
                     }
@@ -140,7 +165,7 @@ namespace VanillaRacesExpandedLycanthrope
                 }
                 foreach (Gene gene in pawn.genes.Xenogenes)
                 {
-                    if (!xenotype.AllGenes.Contains(gene.def))
+                    if (!xenotype.AllGenes.Contains(gene.def) && !morphedGenesToMaintain.Contains(gene))
                     {
                         modifiedXenogenes.Add(gene.def);
                     }
@@ -168,14 +193,11 @@ namespace VanillaRacesExpandedLycanthrope
                     foreach (GeneDef genedef in comp.xenogenes) { pawn.genes.AddGene(genedef, true); }
 
                 }
-                pawn.genes.xenotypeName=comp.xenotypeName;
-                pawn.genes.iconDef=comp.xenotypeicon;
+                pawn.genes.xenotypeName = comp.xenotypeName;
+                pawn.genes.iconDef = comp.xenotypeicon;
 
                 pawn.health.RemoveHediff(pawn.health.hediffSet.GetFirstHediffOfDef(InternalDefOf.VRE_Morphed));
-
-
             }
-
         }
 
 
@@ -188,8 +210,86 @@ namespace VanillaRacesExpandedLycanthrope
                 pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable);
             }
         }
-    }
 
+        public override void CompTick()
+        {
+            base.CompTick();
+
+            if (this.parent.pawn.IsHashIntervalTick(1000))
+            {
+                if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_NocturnalMorphing))
+                {
+
+                    float currentTime = GenLocalDate.DayTick(this.parent.pawn);
+                    if (currentTime > 45000 || currentTime < 15000)
+                    {
+                        if (!MorphConditionSwitch) {
+                            this.Apply(this.parent.pawn, null);
+                            MorphConditionSwitch = true;
+                        }                      
+                    }
+                    else
+                    { 
+                        if (MorphConditionSwitch)
+                        {
+                            this.Apply(this.parent.pawn, null);
+                            MorphConditionSwitch = false;
+                        }
+                    }
+                }
+                if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_AdulthoodMorphing))
+                {
+
+                    if (this.parent.pawn.ageTracker.AgeBiologicalYears >= 16)
+                    {
+                        this.Apply(this.parent.pawn, null);
+                    }
+                }
+                if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_SeasonalMorphing))
+                {
+
+                    float currentTime = GenLocalDate.DayOfYear(this.parent.pawn);
+                    if (currentTime > 31 && currentTime < 60)
+                    {
+                        if (!MorphConditionSwitch)
+                        {
+                            this.Apply(this.parent.pawn, null);
+                            MorphConditionSwitch = true;
+                        }
+                    }
+                    else
+                    {
+                        if (MorphConditionSwitch)
+                        {
+                            this.Apply(this.parent.pawn, null);
+                            MorphConditionSwitch = false;
+                        }
+                    }
+                }
+                if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_DamageMorphing))
+                {
+
+                    float pawnHealth = this.parent.pawn.health.summaryHealth.SummaryHealthPercent;
+                    if (pawnHealth < 0.40)
+                    {
+                        if (!MorphConditionSwitch)
+                        {
+                            this.Apply(this.parent.pawn, null);
+                            MorphConditionSwitch = true;
+                        }
+                    }
+                    else if(pawnHealth > 0.80)
+                    {
+                        if (MorphConditionSwitch)
+                        {
+                            this.Apply(this.parent.pawn, null);
+                            MorphConditionSwitch = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 
