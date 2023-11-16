@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef>
+		<defName>VRE_Territorial</defName>
+		<label>territorial</label>
+		<displayCategory>VRE_Morphs</displayCategory>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_Territorial</iconPath>
+		<displayOrderInCategory>1000</displayOrderInCategory>
+		<conditionalStatAffecters>
+			<li Class="VanillaGenesExpanded.ConditionalStatAffecter_OutsideColonyMap">
+				<statOffsets>
+					<MentalBreakThreshold>0.20</MentalBreakThreshold>
+				</statOffsets>
+			</li>
+			<li Class="VanillaGenesExpanded.ConditionalStatAffecter_InColonyMap">
+				<statOffsets>
+					<MentalBreakThreshold>-0.20</MentalBreakThreshold>
+				</statOffsets>
+			</li>
+		</conditionalStatAffecters>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>2</biostatMet>
+		
+		
+	</GeneDef>
+	
+
+</Defs>
