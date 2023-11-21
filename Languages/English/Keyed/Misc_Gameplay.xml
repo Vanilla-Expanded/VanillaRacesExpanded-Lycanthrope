@@ -2,7 +2,8 @@
 <LanguageData>
 
 
-	
+	<VRE_DisablePhotophobiaMessage>Disable photophobia message</VRE_DisablePhotophobiaMessage>
+	<VRE_DisablePhotophobiaMessage_Description>By default, every time a pawn with the photophobia gene fless from light the game will generate a letter informing the player. This may be a bit too much if you have many pawns fleeing often, so you can disable it with this toggle. Bear in mind the pawns will still flee, you'll just NOT get informed.</VRE_DisablePhotophobiaMessage_Description>
 
 
 </LanguageData>

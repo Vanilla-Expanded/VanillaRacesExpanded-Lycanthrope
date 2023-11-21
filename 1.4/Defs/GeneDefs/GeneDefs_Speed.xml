@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef ParentName="GeneMoveSpeedBase">
+		<defName>VRE_MoveSpeed_ExtremelyQuick</defName>
+		<label>extremely fast runner</label>
+		<labelShortAdj>super fast</labelShortAdj>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_ExtremelyFastRunner</iconPath>
+		<displayOrderInCategory>20.01</displayOrderInCategory>
+		<customEffectDescriptions>
+			<li>Colonist will ignore terrain movement costs</li>
+		</customEffectDescriptions>
+		<statOffsets>
+			<MoveSpeed>0.6</MoveSpeed>
+		</statOffsets>
+		<biostatMet>-5</biostatMet>
+		<symbolPack>
+			<wholeNameSymbols>
+				<li>
+					<symbol>speeder</symbol>
+				</li>
+			</wholeNameSymbols>
+			<prefixSymbols>
+				<li>
+					<symbol>speed</symbol>
+				</li>
+				<li>
+					<symbol>fast</symbol>
+				</li>
+				<li>
+					<symbol>quick</symbol>
+				</li>
+				<li>
+					<symbol>agi</symbol>
+				</li>
+				<li>
+					<symbol>nimb</symbol>
+				</li>
+				<li>
+					<symbol>swift</symbol>
+				</li>
+				<li>
+					<symbol>flash</symbol>
+				</li>
+			</prefixSymbols>
+			<suffixSymbols>
+				<li>
+					<symbol>flash</symbol>
+				</li>
+				<li>
+					<symbol>runner</symbol>
+				</li>
+				<li>
+					<symbol>sprinter</symbol>
+				</li>
+			</suffixSymbols>
+		</symbolPack>
+		<modExtensions>
+			<li Class="VanillaGenesExpanded.GeneExtension">
+				<hediffToWholeBody>VRE_MoveSpeed_ExtremelyQuick</hediffToWholeBody>
+			</li>
+		</modExtensions>
+	</GeneDef>
+</Defs>

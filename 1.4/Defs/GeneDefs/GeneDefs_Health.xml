@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<GeneDef>
+		<defName>VRE_SuperiorDarkVision</defName>
+		<label>superior dark vision</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_SuperiorDarkVision</iconPath>
+		<ignoreDarkness>true</ignoreDarkness>
+		<displayCategory>Miscellaneous</displayCategory>
+		<displayOrderInCategory>60.01</displayOrderInCategory>
+		<biostatMet>-1</biostatMet>
+		<conditionalStatAffecters>
+			<li Class="VanillaGenesExpanded.ConditionalStatAffecter_Darkness">
+				<statFactors>
+					<WorkSpeedGlobal>1.05</WorkSpeedGlobal>
+					<MoveSpeed>1.1</MoveSpeed>
+					<ShootingAccuracyPawn>1.1</ShootingAccuracyPawn>
+					<MeleeHitChance>1.1</MeleeHitChance>
+					<MeleeDodgeChance>1.1</MeleeDodgeChance>
+				</statFactors>
+			</li>
+			
+		</conditionalStatAffecters>
+		<symbolPack>
+			<prefixSymbols>
+				<li>
+					<symbol>dark</symbol>
+				</li>
+				<li>
+					<symbol>night</symbol>
+				</li>
+				<li>
+					<symbol>dim</symbol>
+				</li>
+				<li>
+					<symbol>gloom</symbol>
+				</li>
+				<li>
+					<symbol>murk</symbol>
+				</li>
+				<li>
+					<symbol>deep</symbol>
+				</li>
+				<li>
+					<symbol>umbra</symbol>
+				</li>
+			</prefixSymbols>
+			<suffixSymbols>
+				<li>
+					<symbol>shadow</symbol>
+				</li>
+			</suffixSymbols>
+		</symbolPack>
+	</GeneDef>
+</Defs>

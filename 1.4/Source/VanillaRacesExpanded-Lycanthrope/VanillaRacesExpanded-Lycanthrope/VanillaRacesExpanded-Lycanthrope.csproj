@@ -305,11 +305,15 @@
     <Compile Include="Defs\MorphGeneTemplateDef.cs" />
     <Compile Include="Harmony\GeneDefGenerator_ImpliedGeneDefs.cs" />
     <Compile Include="Harmony\HarmonyInstance.cs" />
-    <Compile Include="HediffComps\HediffComp_Morphed.cs" />
     <Compile Include="HediffComps\HediffComp_MorphModifications.cs" />
-    <Compile Include="HediffComps\Properties\HediffCompProperties_Morphed.cs" />
     <Compile Include="HediffComps\Properties\HediffCompProperties_MorphModifications.cs" />
+    <Compile Include="MentalBreakWorkers\MentalBreakWorker_Photophobia.cs" />
+    <Compile Include="MentalStates\MentalState_Photophobia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\VanillaRacesExpandedLycanthrope_Settings.cs" />
+    <Compile Include="Settings\VanillaRacesExpandedLycanthrope_settingsController.cs" />
+    <Compile Include="ThoughtWorkers\ThoughtWorker_LightSensitivity.cs" />
+    <Compile Include="ThoughtWorkers\ThoughtWorker_Photophobia.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>

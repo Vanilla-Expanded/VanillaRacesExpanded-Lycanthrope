@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef>
+		<defName>VRE_SpeechInability</defName>
+		<label>speech inability</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_SpeechInability</iconPath>
+		<displayOrderInCategory>500</displayOrderInCategory>
+		<capMods>
+			<li>
+				<capacity>Talking</capacity>
+				<setMax>0</setMax>
+			</li>
+		</capMods>
+		<displayCategory>Healing</displayCategory>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>-1</biostatMet>
+	</GeneDef>
+</Defs>

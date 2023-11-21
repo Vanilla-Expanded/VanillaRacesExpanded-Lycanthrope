@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef ParentName="GeneEarsBase">
+		<defName>VRE_CanineEars</defName>
+		<label>canine ears</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_EarCanine</iconPath>
+		<graphicData>
+			<graphicPath>Things/Pawn/Humanlike/HeadAttachments/CanineEars/CanineEars</graphicPath>
+			<colorType>Skin</colorType>
+		</graphicData>
+	</GeneDef>
+	<GeneDef ParentName="GeneNoseBase">
+		<defName>VRE_CanineNose</defName>
+		<label>canine nose</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_NoseCanine</iconPath>
+		<graphicData>
+			<graphicPath>Things/Pawn/Humanlike/HeadAttachments/CanineNose/CanineNose</graphicPath>
+			<narrowCrownHorizontalOffset>0.03</narrowCrownHorizontalOffset>
+			<useSkinShader>true</useSkinShader>
+			<layer>PostHair</layer>
+		</graphicData>
+		<missingGeneRomanceChanceFactor>0.2</missingGeneRomanceChanceFactor>
+		<displayCategory>Miscellaneous</displayCategory>
+		<displayOrderInCategory>410.1</displayOrderInCategory>
+	</GeneDef>
+	<GeneDef ParentName="GeneTailBase">
+		<defName>VRE_CanineTail</defName>
+		<label>wolf tail</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_TailWolf</iconPath>
+		<iconColor>(0.75, 0.75, 0.75)</iconColor>
+		<displayOrderInCategory>1000.1</displayOrderInCategory>
+		<statOffsets>
+			<MoveSpeed>0.1</MoveSpeed>
+		</statOffsets>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>-1</biostatMet>
+		<graphicData>
+			<graphicPath>Things/Pawn/Humanlike/BodyAttachments/WolfTail/WolfTail</graphicPath>
+			<colorType>Hair</colorType>
+			<drawOffsetNorth>(0.1, 0.2, -0.25)</drawOffsetNorth>
+			<drawOffsetSouth>(-0.1, -0.1, -0.25)</drawOffsetSouth>
+			<drawOffsetEast>(-0.5, -0.1, -0.15)</drawOffsetEast>
+		</graphicData>
+	</GeneDef>
+</Defs>

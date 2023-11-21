@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+		<success>Always</success>
+		<xpath>/Defs/ThoughtDef[defName = "EnvironmentDark"]/nullifyingGenes</xpath>
+		<value>
+			 <li>VRE_SuperiorDarkVision</li>
+		</value>
+	</Operation>
+</Patch>

@@ -6,12 +6,12 @@
 		</mods>
 		<match Class="PatchOperationSequence">
 			<operations>
-				<!--<li Class="PatchOperationReplace">
-					<xpath>/Defs/GeneDef[defName="VRE_RotBlood"]/displayCategory</xpath>
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/XenotypeDef[defName="VRE_Wolfman"]/genes/li[@Name="AlphaGenesSwapLycans"]</xpath>
 					<value>
-						<displayCategory>AG_BloodType</displayCategory>
+						<li Name="AlphaGenesSwapLycans">AG_NightOwl</li>
 					</value>
-				</li>-->
+				</li>
 				
 			</operations>
 		</match>

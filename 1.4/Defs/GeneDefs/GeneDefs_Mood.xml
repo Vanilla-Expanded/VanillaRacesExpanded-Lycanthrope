@@ -3,7 +3,7 @@
 	<GeneDef>
 		<defName>VRE_Territorial</defName>
 		<label>territorial</label>
-		<displayCategory>VRE_Morphs</displayCategory>
+		<displayCategory>Mood</displayCategory>
 		<description>todo.</description>
 		<iconPath>UI/Icons/Genes/Gene_Territorial</iconPath>
 		<displayOrderInCategory>1000</displayOrderInCategory>

@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
+	<XenotypeDef>
+		<defName>VRE_Wolfman</defName>
+		<label>wolfman</label>
+		<description>todo.</description>
+		<descriptionShort>todo.</descriptionShort>
+		<iconPath>UI/Icons/Xenotypes/Dirtmole</iconPath>
+		<inheritable>false</inheritable>
+		<genes>
+			<li>VRE_Morphs_VRE_Lycan</li>
+			<li>VRE_Morphs_NocturnalMorphing</li>
+			<!--<li>VRE_PackMentality</li>-->
+			<li>DarkVision</li>
+			<li Name="AlphaGenesSwapLycans">VRE_Nocturnal</li>
+			<!--<li>VRE_ChestFur</li>-->
+			<!--<li>VRE_OnlySideburns</li>-->
+	
+			
+		</genes>
+	</XenotypeDef>
+
 	<XenotypeDef>
 		<defName>VRE_Lycan</defName>
 		<label>lycan</label>
@@ -8,8 +29,21 @@
 		<iconPath>UI/Icons/Xenotypes/Dirtmole</iconPath>
 		<inheritable>false</inheritable>
 		<genes>
-			
-			
+			<li>VRE_Morphs_VRE_Wolfman</li>
+			<li>VRE_Morphs_NocturnalMorphing</li>
+			<!--<li>VRE_PackMentality</li>-->
+			<li>VRE_SuperiorDarkVision</li>
+			<!--<li>VRE_WarHowl</li>-->
+			<li>VRE_Territorial</li>
+			<li Name="AlphaGenesSwapLycans">VRE_Nocturnal</li>
+			<li>VRE_MoveSpeed_ExtremelyQuick</li>
+			<li>VRE_SpeechInability</li>
+			<li>VRE_ImprovedDodge</li>
+			<li>VRE_LightSensitivity</li>
+			<li>VRE_CanineEars</li>
+			<li>VRE_CanineNose</li>
+			<li>VRE_CanineTail</li>
+			<li>Furskin</li>
 	
 			
 		</genes>

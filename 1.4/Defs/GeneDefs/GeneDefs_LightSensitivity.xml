@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef>
+		<defName>VRE_LightSensitivity</defName>
+		<label>light sensitivity</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_LightSensitivity</iconPath>
+		<displayOrderInCategory>500</displayOrderInCategory>
+		<dislikesSunlight>true</dislikesSunlight>
+		<displayCategory>ResistanceAndWeakness</displayCategory>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>-1</biostatMet>
+		<exclusionTags>
+			<li>VRE_LightSensitivity</li>
+		</exclusionTags>
+		 <conditionalStatAffecters>
+      <li Class="VanillaGenesExpanded.ConditionalStatAffecter_AnyLightSensitivity">
+        <statFactors>
+          <MoveSpeed>0.9</MoveSpeed>
+        </statFactors>
+      </li>
+    </conditionalStatAffecters>
+	</GeneDef>
+	
+	<GeneDef>
+		<defName>VRE_IntenseLightSensitivity</defName>
+		<label>intense light sensitivity</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_LightSensitivityIntense</iconPath>
+		<displayOrderInCategory>501</displayOrderInCategory>
+		<dislikesSunlight>true</dislikesSunlight>
+		<displayCategory>ResistanceAndWeakness</displayCategory>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>-1</biostatMet>
+		<exclusionTags>
+			<li>VRE_LightSensitivity</li>
+		</exclusionTags>
+		 <conditionalStatAffecters>
+      <li Class="VanillaGenesExpanded.ConditionalStatAffecter_AnyLightSensitivity">
+        <statFactors>
+          <MoveSpeed>0.8</MoveSpeed>
+        </statFactors>
+      </li>
+    </conditionalStatAffecters>
+	</GeneDef>
+	
+</Defs>

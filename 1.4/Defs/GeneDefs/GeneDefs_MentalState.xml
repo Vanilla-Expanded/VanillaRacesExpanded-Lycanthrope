@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef>
+		<defName>VRE_Photophobia</defName>
+		<label>photophobia</label>
+		<description>todo</description>
+		<iconPath>UI/Icons/Genes/Gene_Photophobia</iconPath>
+		<displayCategory>ResistanceAndWeakness</displayCategory>
+		<displayOrderInCategory>82</displayOrderInCategory>
+		<biostatMet>3</biostatMet>
+	
+		<mentalBreakMtbDays>0.1</mentalBreakMtbDays>
+		<mentalBreakDef>VRE_Photophobia</mentalBreakDef>
+		
+	</GeneDef>
+	
+	
+</Defs>

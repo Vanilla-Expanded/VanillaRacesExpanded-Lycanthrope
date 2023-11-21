@@ -23,13 +23,16 @@ namespace VanillaRacesExpandedLycanthrope
 
         public bool MorphConditionSwitch = false;
 
+        public bool morphed = false;
+
         List<Gene> morphedGenesToMaintain;
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Collections.Look<Gene>(ref morphedGenesToMaintain, "morphedGenesToMaintain",LookMode.Deep);
-            Scribe_Values.Look(ref MorphConditionSwitch, "MorphConditionSwitch");
+            Scribe_Collections.Look<Gene>(ref morphedGenesToMaintain, nameof(morphedGenesToMaintain),LookMode.Deep);
+            Scribe_Values.Look(ref MorphConditionSwitch, nameof(MorphConditionSwitch));
+            Scribe_Values.Look(ref morphed, nameof(morphed));
         }
 
         public override bool ShouldHideGizmo
@@ -71,11 +74,11 @@ namespace VanillaRacesExpandedLycanthrope
                             morphedGenesToMaintain.Add(gene);
                             MorphGeneDefExtension extension = gene.def.GetModExtension<MorphGeneDefExtension>();
                             if (extension != null)
-                            {                            
+                            {
                                 xenotype = extension.xenotype;
                             }
                         }
-                        else morphedGenesToMaintain.Add(gene);
+                        else if (!morphedGenesToMaintain.Contains(gene)) { morphedGenesToMaintain.Add(gene); } 
 
 
                     }
@@ -83,9 +86,11 @@ namespace VanillaRacesExpandedLycanthrope
                 }
             }
 
-            if (!pawn.health.hediffSet.HasHediff(InternalDefOf.VRE_Morphed))
+            // Morph from 1 to 2
+
+            if (!morphed)
             {
-                pawn.health.AddHediff(InternalDefOf.VRE_Morphed);
+                morphed=true;
 
                 Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(InternalDefOf.VRE_Morphed);
 
@@ -139,6 +144,9 @@ namespace VanillaRacesExpandedLycanthrope
 
 
             }
+
+            // Morph back from 2 to 1
+
             else
             {
 
@@ -196,7 +204,7 @@ namespace VanillaRacesExpandedLycanthrope
                 pawn.genes.xenotypeName = comp.xenotypeName;
                 pawn.genes.iconDef = comp.xenotypeicon;
 
-                pawn.health.RemoveHediff(pawn.health.hediffSet.GetFirstHediffOfDef(InternalDefOf.VRE_Morphed));
+                morphed = false;
             }
         }
 
