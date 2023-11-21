@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-	<GeneDef ParentName="GeneMoveSpeedBase">
+	<GeneDef>
 		<defName>VRE_MoveSpeed_ExtremelyQuick</defName>
 		<label>extremely fast runner</label>
 		<labelShortAdj>super fast</labelShortAdj>
 		<description>todo.</description>
 		<iconPath>UI/Icons/Genes/Gene_ExtremelyFastRunner</iconPath>
-		<displayOrderInCategory>20.01</displayOrderInCategory>
 		<customEffectDescriptions>
 			<li>Colonist will ignore terrain movement costs</li>
 		</customEffectDescriptions>
 		<statOffsets>
 			<MoveSpeed>0.6</MoveSpeed>
 		</statOffsets>
-		<biostatMet>-5</biostatMet>
+		<displayCategory>Archite</displayCategory>
+		<exclusionTags>
+			<li>MoveSpeed</li>
+		</exclusionTags>
+		<biostatCpx>2</biostatCpx>
+		<biostatMet>0</biostatMet>
+		<biostatArc>1</biostatArc>
 		<symbolPack>
 			<wholeNameSymbols>
 				<li>

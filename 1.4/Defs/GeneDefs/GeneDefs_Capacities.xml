@@ -14,6 +14,6 @@
 		</capMods>
 		<displayCategory>Healing</displayCategory>
 		<biostatCpx>1</biostatCpx>
-		<biostatMet>-1</biostatMet>
+		<biostatMet>3</biostatMet>
 	</GeneDef>
 </Defs>

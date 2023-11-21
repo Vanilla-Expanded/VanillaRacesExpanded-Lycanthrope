@@ -70,10 +70,7 @@ namespace VanillaRacesExpandedLycanthrope
                 modContentPack = template.modContentPack,
                 modExtensions = new List<DefModExtension> {
                     new VanillaGenesExpanded.GeneExtension {
-                        backgroundPathArchite = "UI/Icons/Genes/GeneBackground_MorphGene",
-                        hediffToWholeBody = InternalDefOf.VRE_MorphModifications
-                      
-                       
+                        backgroundPathArchite = "UI/Icons/Genes/GeneBackground_MorphGene"
                     },
                     new MorphGeneDefExtension {
                         xenotype = def

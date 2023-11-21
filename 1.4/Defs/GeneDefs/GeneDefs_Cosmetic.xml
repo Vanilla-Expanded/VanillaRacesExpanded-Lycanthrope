@@ -9,6 +9,7 @@
 			<graphicPath>Things/Pawn/Humanlike/HeadAttachments/CanineEars/CanineEars</graphicPath>
 			<colorType>Skin</colorType>
 		</graphicData>
+		<biostatCpx>1</biostatCpx>
 	</GeneDef>
 	<GeneDef ParentName="GeneNoseBase">
 		<defName>VRE_CanineNose</defName>
@@ -21,6 +22,7 @@
 			<useSkinShader>true</useSkinShader>
 			<layer>PostHair</layer>
 		</graphicData>
+		<biostatCpx>1</biostatCpx>
 		<missingGeneRomanceChanceFactor>0.2</missingGeneRomanceChanceFactor>
 		<displayCategory>Miscellaneous</displayCategory>
 		<displayOrderInCategory>410.1</displayOrderInCategory>
@@ -33,10 +35,9 @@
 		<iconColor>(0.75, 0.75, 0.75)</iconColor>
 		<displayOrderInCategory>1000.1</displayOrderInCategory>
 		<statOffsets>
-			<MoveSpeed>0.1</MoveSpeed>
+			<MoveSpeed>0.05</MoveSpeed>
 		</statOffsets>
 		<biostatCpx>1</biostatCpx>
-		<biostatMet>-1</biostatMet>
 		<graphicData>
 			<graphicPath>Things/Pawn/Humanlike/BodyAttachments/WolfTail/WolfTail</graphicPath>
 			<colorType>Hair</colorType>
@@ -44,5 +45,18 @@
 			<drawOffsetSouth>(-0.1, -0.1, -0.25)</drawOffsetSouth>
 			<drawOffsetEast>(-0.5, -0.1, -0.15)</drawOffsetEast>
 		</graphicData>
+	</GeneDef>
+	<GeneDef ParentName="GeneBeardStyleBase">
+		<defName>VRE_OnlySideburns</defName>
+		<label>only sideburns</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_BeardStyleSideburnsOnly</iconPath>
+		<displayOrderInCategory>60.1</displayOrderInCategory>
+		<beardTagFilter>
+			<whitelist>true</whitelist>
+			<tags>
+				<li>VRE_WolfmanBeards</li>
+			</tags>
+		</beardTagFilter>
 	</GeneDef>
 </Defs>

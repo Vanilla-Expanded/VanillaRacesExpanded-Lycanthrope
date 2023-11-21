@@ -6,7 +6,7 @@
 		<label>wolfman</label>
 		<description>todo.</description>
 		<descriptionShort>todo.</descriptionShort>
-		<iconPath>UI/Icons/Xenotypes/Dirtmole</iconPath>
+		<iconPath>UI/Icons/Xenotypes/Wolfman</iconPath>
 		<inheritable>false</inheritable>
 		<genes>
 			<li>VRE_Morphs_VRE_Lycan</li>
@@ -14,8 +14,8 @@
 			<!--<li>VRE_PackMentality</li>-->
 			<li>DarkVision</li>
 			<li Name="AlphaGenesSwapLycans">VRE_Nocturnal</li>
-			<!--<li>VRE_ChestFur</li>-->
-			<!--<li>VRE_OnlySideburns</li>-->
+			<li>VRE_ChestFur</li>
+			<li>VRE_OnlySideburns</li>
 	
 			
 		</genes>
@@ -26,7 +26,7 @@
 		<label>lycan</label>
 		<description>todo.</description>
 		<descriptionShort>todo.</descriptionShort>
-		<iconPath>UI/Icons/Xenotypes/Dirtmole</iconPath>
+		<iconPath>UI/Icons/Xenotypes/Lycan</iconPath>
 		<inheritable>false</inheritable>
 		<genes>
 			<li>VRE_Morphs_VRE_Wolfman</li>

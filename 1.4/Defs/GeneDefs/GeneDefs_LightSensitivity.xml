@@ -9,7 +9,7 @@
 		<dislikesSunlight>true</dislikesSunlight>
 		<displayCategory>ResistanceAndWeakness</displayCategory>
 		<biostatCpx>1</biostatCpx>
-		<biostatMet>-1</biostatMet>
+		<biostatMet>2</biostatMet>
 		<exclusionTags>
 			<li>VRE_LightSensitivity</li>
 		</exclusionTags>
@@ -31,7 +31,7 @@
 		<dislikesSunlight>true</dislikesSunlight>
 		<displayCategory>ResistanceAndWeakness</displayCategory>
 		<biostatCpx>1</biostatCpx>
-		<biostatMet>-1</biostatMet>
+		<biostatMet>3</biostatMet>
 		<exclusionTags>
 			<li>VRE_LightSensitivity</li>
 		</exclusionTags>

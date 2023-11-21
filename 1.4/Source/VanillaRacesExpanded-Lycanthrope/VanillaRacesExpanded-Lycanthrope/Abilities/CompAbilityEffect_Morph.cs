@@ -25,14 +25,31 @@ namespace VanillaRacesExpandedLycanthrope
 
         public bool morphed = false;
 
-        List<Gene> morphedGenesToMaintain;
+        List<Gene> morphedGenesToMaintain = new List<Gene>();
+
+        public List<GeneDef> endogenes = new List<GeneDef>();
+
+        public List<GeneDef> xenogenes = new List<GeneDef>();
+
+        public string xenotypeName;
+
+        public XenotypeIconDef xenotypeicon;
+
+        public XenotypeDef xenotype;
+
+
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Collections.Look<Gene>(ref morphedGenesToMaintain, nameof(morphedGenesToMaintain),LookMode.Deep);
+            Scribe_Collections.Look<Gene>(ref morphedGenesToMaintain, nameof(morphedGenesToMaintain),LookMode.Reference);
             Scribe_Values.Look(ref MorphConditionSwitch, nameof(MorphConditionSwitch));
             Scribe_Values.Look(ref morphed, nameof(morphed));
+            Scribe_Collections.Look(ref this.endogenes, nameof(this.endogenes), LookMode.Def);
+            Scribe_Collections.Look(ref this.xenogenes, nameof(this.xenogenes), LookMode.Def);
+            Scribe_Values.Look(ref this.xenotypeName, nameof(this.xenotypeName));
+            Scribe_Defs.Look(ref this.xenotypeicon, nameof(this.xenotypeicon));
+            Scribe_Defs.Look(ref this.xenotype, nameof(this.xenotype));
         }
 
         public override bool ShouldHideGizmo
@@ -51,17 +68,30 @@ namespace VanillaRacesExpandedLycanthrope
 
         }
 
+        public bool ContainsOfDef(List<Gene> genes,GeneDef def)
+        {
+            foreach(Gene gene in genes)
+            {
+                if(gene.def == def)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
 
 
-
+            Log.Message("Applying, and morphed is "+morphed);
             Pawn pawn = parent.pawn;
 
             List<Gene> genes = pawn.genes?.GenesListForReading;
-            XenotypeDef xenotype = null;
-            morphedGenesToMaintain = new List<Gene>();
+
+            morphedGenesToMaintain.Clear();
 
             if (genes != null)
             {
@@ -69,79 +99,65 @@ namespace VanillaRacesExpandedLycanthrope
                 {
                     if (gene.def.defName.Contains("VRE_Morphs"))
                     {
-                        if (gene.Active)
+                        if(!ContainsOfDef(morphedGenesToMaintain, gene.def))
                         {
-                            morphedGenesToMaintain.Add(gene);
-                            MorphGeneDefExtension extension = gene.def.GetModExtension<MorphGeneDefExtension>();
-                            if (extension != null)
+                            if (gene.Active)
                             {
-                                xenotype = extension.xenotype;
+                                morphedGenesToMaintain.Add(gene);
+                                if (this.xenotype == null)
+                                {
+                                    MorphGeneDefExtension extension = gene.def.GetModExtension<MorphGeneDefExtension>();
+                                    if (extension != null)
+                                    {
+                                        xenotype = extension.xenotype;
+                                    }
+                                }
+
                             }
+                            else { morphedGenesToMaintain.Add(gene); }
                         }
-                        else if (!morphedGenesToMaintain.Contains(gene)) { morphedGenesToMaintain.Add(gene); } 
-
-
                     }
-
                 }
             }
+            
 
             // Morph from 1 to 2
 
             if (!morphed)
             {
                 morphed=true;
-
-                Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(InternalDefOf.VRE_Morphed);
-
-                HediffComp_Morphed comp = hediff.TryGetComp<HediffComp_Morphed>();
-
+              
                 List<GeneDef> endogenes = new List<GeneDef>();
                 List<GeneDef> xenogenes = new List<GeneDef>();
 
                 foreach (Gene gene in pawn.genes.Endogenes)
                 {
-                    if (!morphedGenesToMaintain.Contains(gene)) { endogenes.Add(gene.def); }
+                    if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { endogenes.Add(gene.def); }
                         
                 }
                 foreach (Gene gene in pawn.genes.Xenogenes)
                 {
-                    if (!morphedGenesToMaintain.Contains(gene))
-                    {
-                        xenogenes.Add(gene.def);
-                    }
+                    if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { xenogenes.Add(gene.def); }
                 }
 
-                comp.endogenes = endogenes;
-                comp.xenogenes = xenogenes;
-                comp.xenotypeName = pawn.genes.xenotypeName;
-                comp.xenotypeicon = pawn.genes.iconDef;
+                this.endogenes.Clear();
+                this.xenogenes.Clear();
+                foreach (GeneDef genedef in endogenes) { this.endogenes.Add(genedef); }
+                foreach (GeneDef genedef in xenogenes) { this.xenogenes.Add(genedef); }
+                this.xenotypeName = pawn.genes.xenotypeName;
+                this.xenotypeicon = pawn.genes.iconDef;
+
+              
 
                 if (pawn.genes?.GenesListForReading.Count > 0)
                 {
                     foreach (Gene gene in pawn.genes?.GenesListForReading)
                     {
-                        if (!morphedGenesToMaintain.Contains(gene)) { pawn.genes?.RemoveGene(gene); }
+                        if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { pawn.genes?.RemoveGene(gene); }
 
                     }
                 }
                 SetXenotypeNoClearing(pawn, xenotype);
-
-                Hediff hediffModifications = pawn.health.hediffSet.GetFirstHediffOfDef(InternalDefOf.VRE_MorphModifications);
-
-                HediffComp_MorphModifications compModifications = hediffModifications.TryGetComp<HediffComp_MorphModifications>();
-
-                if (compModifications.endogenes.Count > 0)
-                {
-                    foreach (GeneDef genedef in compModifications.endogenes) { pawn.genes.AddGene(genedef, false); }
-
-                }
-                if (compModifications.xenogenes.Count > 0)
-                {
-                    foreach (GeneDef genedef in compModifications.xenogenes) { pawn.genes.AddGene(genedef, true); }
-
-                }
-
 
             }
 
@@ -149,62 +165,65 @@ namespace VanillaRacesExpandedLycanthrope
 
             else
             {
+                morphed = false;
 
-
-                Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(InternalDefOf.VRE_Morphed);
-                HediffComp_Morphed comp = hediff.TryGetComp<HediffComp_Morphed>();
-
-                Hediff hediffModifications = pawn.health.hediffSet.GetFirstHediffOfDef(InternalDefOf.VRE_MorphModifications);
-                HediffComp_MorphModifications compModifications = hediffModifications.TryGetComp<HediffComp_MorphModifications>();
-
-                compModifications.endogenes.Clear();
-                compModifications.xenogenes.Clear();
+               
 
                 List<GeneDef> modifiedEndogenes = new List<GeneDef>();
                 List<GeneDef> modifiedXenogenes = new List<GeneDef>();
 
+                foreach (GeneDef genedef in this.endogenes) { modifiedEndogenes.Add(genedef); }
+                foreach (GeneDef genedef in this.xenogenes) { modifiedXenogenes.Add(genedef); }
+
+                string modifiedXenotype = this.xenotypeName;
+                XenotypeIconDef modifiedIcon = this.xenotypeicon;
+
+                this.endogenes.Clear();
+                this.xenogenes.Clear();
+
                 foreach (Gene gene in pawn.genes.Endogenes)
                 {
-                    if (!xenotype.AllGenes.Contains(gene.def)&&!morphedGenesToMaintain.Contains(gene))
-                    {
-                        modifiedEndogenes.Add(gene.def);
-                    }
+                    if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { this.endogenes.Add(gene.def); }
 
                 }
                 foreach (Gene gene in pawn.genes.Xenogenes)
                 {
-                    if (!xenotype.AllGenes.Contains(gene.def) && !morphedGenesToMaintain.Contains(gene))
+                    if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { this.xenogenes.Add(gene.def); }
+                }
+
+            
+
+                if (pawn.genes.GenesListForReading.Count > 0)
+                {
+                   
+                    foreach (Gene gene in pawn.genes.GenesListForReading)
                     {
-                        modifiedXenogenes.Add(gene.def);
+                       
+                        if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { 
+                            pawn.genes.RemoveGene(gene);
+                          
+                        }
                     }
                 }
-
-                compModifications.endogenes = modifiedEndogenes;
-                compModifications.xenogenes = modifiedXenogenes;
-
-
-
-                if (pawn.genes?.GenesListForReading.Count > 0)
+                if (modifiedEndogenes.Count > 0)
                 {
-                    foreach (Gene gene in pawn.genes?.GenesListForReading)
-                    {
-                        if (!morphedGenesToMaintain.Contains(gene)) { pawn.genes?.RemoveGene(gene); }
-                    }
-                }
-                if (comp.endogenes.Count > 0)
-                {
-                    foreach (GeneDef genedef in comp.endogenes) { pawn.genes.AddGene(genedef, false); }
+                    foreach (GeneDef genedef in modifiedEndogenes) { pawn.genes.AddGene(genedef, false); }
 
                 }
-                if (comp.xenogenes.Count > 0)
+                if (modifiedXenogenes.Count > 0)
                 {
-                    foreach (GeneDef genedef in comp.xenogenes) { pawn.genes.AddGene(genedef, true); }
+                    foreach (GeneDef genedef in modifiedXenogenes) { pawn.genes.AddGene(genedef, true); }
 
                 }
-                pawn.genes.xenotypeName = comp.xenotypeName;
-                pawn.genes.iconDef = comp.xenotypeicon;
+                this.xenotypeName = pawn.genes.xenotypeName;
+                this.xenotypeicon = pawn.genes.iconDef;
 
-                morphed = false;
+
+
+                pawn.genes.xenotypeName = modifiedXenotype;
+                pawn.genes.iconDef = modifiedIcon;
+
+                
             }
         }
 
@@ -215,7 +234,7 @@ namespace VanillaRacesExpandedLycanthrope
             pawn.genes.iconDef = null;
             for (int i = 0; i < xenotype.genes.Count; i++)
             {
-                pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable);
+                if (!ContainsOfDef(morphedGenesToMaintain, xenotype.genes[i])) { pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable); }               
             }
         }
 

@@ -7,7 +7,7 @@
 		<iconPath>UI/Icons/Genes/Gene_Photophobia</iconPath>
 		<displayCategory>ResistanceAndWeakness</displayCategory>
 		<displayOrderInCategory>82</displayOrderInCategory>
-		<biostatMet>3</biostatMet>
+		<biostatMet>5</biostatMet>
 	
 		<mentalBreakMtbDays>0.1</mentalBreakMtbDays>
 		<mentalBreakDef>VRE_Photophobia</mentalBreakDef>

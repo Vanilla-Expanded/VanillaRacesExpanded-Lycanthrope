@@ -9,7 +9,7 @@
 		<ignoreDarkness>true</ignoreDarkness>
 		<displayCategory>Miscellaneous</displayCategory>
 		<displayOrderInCategory>60.01</displayOrderInCategory>
-		<biostatMet>-1</biostatMet>
+		<biostatMet>-2</biostatMet>
 		<conditionalStatAffecters>
 			<li Class="VanillaGenesExpanded.ConditionalStatAffecter_Darkness">
 				<statFactors>

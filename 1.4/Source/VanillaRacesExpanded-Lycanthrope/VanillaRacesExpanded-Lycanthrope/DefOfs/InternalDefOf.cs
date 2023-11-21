@@ -12,8 +12,7 @@ namespace VanillaRacesExpandedLycanthrope
     public static class InternalDefOf
     {
 
-       
-        public static HediffDef VRE_MorphModifications;
+     
 
         public static MorphGeneTemplateDef VRE_Morphs;
 
