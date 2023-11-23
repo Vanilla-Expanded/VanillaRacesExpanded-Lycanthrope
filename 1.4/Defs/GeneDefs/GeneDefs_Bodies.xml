@@ -33,7 +33,7 @@
 		</statOffsets>
 		<modExtensions>
 			<li Class="VanillaGenesExpanded.GeneExtension">
-				<useSkinColorForFur>true</useSkinColorForFur>
+				<useSkinAndHairColorsForFur>true</useSkinAndHairColorsForFur>
 				
 			</li>
 		</modExtensions>
