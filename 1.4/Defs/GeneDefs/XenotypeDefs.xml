@@ -11,7 +11,7 @@
 		<genes>
 			<li>VRE_Morphs_VRE_Lycan</li>
 			<li>VRE_Morphs_NocturnalMorphing</li>
-			<!--<li>VRE_PackMentality</li>-->
+			<li>VRE_PackMentality</li>
 			<li>DarkVision</li>
 			<li Name="AlphaGenesSwapLycans">VRE_Nocturnal</li>
 			<li>VRE_ChestFur</li>
@@ -31,9 +31,9 @@
 		<genes>
 			<li>VRE_Morphs_VRE_Wolfman</li>
 			<li>VRE_Morphs_NocturnalMorphing</li>
-			<!--<li>VRE_PackMentality</li>-->
+			<li>VRE_PackMentality</li>
 			<li>VRE_SuperiorDarkVision</li>
-			<!--<li>VRE_WarHowl</li>-->
+			<li>VRE_WarHowl</li>
 			<li>VRE_Territorial</li>
 			<li Name="AlphaGenesSwapLycans">VRE_Nocturnal</li>
 			<li>VRE_MoveSpeed_ExtremelyQuick</li>

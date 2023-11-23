@@ -7,6 +7,7 @@ using RimWorld;
 using RimWorld.Planet;
 using Verse;
 using System.Linq;
+using Verse.Sound;
 
 
 
@@ -68,27 +69,30 @@ namespace VanillaRacesExpandedLycanthrope
 
         }
 
-        public bool ContainsOfDef(List<Gene> genes,GeneDef def)
-        {
-            foreach(Gene gene in genes)
-            {
-                if(gene.def == def)
-                {
-                    return true;
-                }
-            }
-            return false;
-
-        }
+        
 
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
 
 
-            Log.Message("Applying, and morphed is "+morphed);
+          
             Pawn pawn = parent.pawn;
+            if (pawn.Map != null)
+            {
+               Effecter effecter = InternalDefOf.CocoonDestroyed.SpawnAttached(pawn, pawn.Map);
+               effecter.Trigger(pawn,null);
+               for (int i = 0; i < 20; i++)
+                {
+                    IntVec3 c;
+                    CellFinder.TryFindRandomReachableCellNear(pawn.Position, pawn.Map, 2, TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Deadly, false), null, null, out c);
 
+                    FilthMaker.TryMakeFilth(c, pawn.Map, ThingDefOf.Filth_Blood);
+                }
+
+                SoundDefOf.Hive_Spawn.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map, false));
+            }
+            
             List<Gene> genes = pawn.genes?.GenesListForReading;
 
             morphedGenesToMaintain.Clear();
@@ -99,7 +103,7 @@ namespace VanillaRacesExpandedLycanthrope
                 {
                     if (gene.def.defName.Contains("VRE_Morphs"))
                     {
-                        if(!ContainsOfDef(morphedGenesToMaintain, gene.def))
+                        if(!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def))
                         {
                             if (gene.Active)
                             {
@@ -132,12 +136,12 @@ namespace VanillaRacesExpandedLycanthrope
 
                 foreach (Gene gene in pawn.genes.Endogenes)
                 {
-                    if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { endogenes.Add(gene.def); }
+                    if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { endogenes.Add(gene.def); }
                         
                 }
                 foreach (Gene gene in pawn.genes.Xenogenes)
                 {
-                    if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { xenogenes.Add(gene.def); }
+                    if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { xenogenes.Add(gene.def); }
                 }
 
                 this.endogenes.Clear();
@@ -153,7 +157,7 @@ namespace VanillaRacesExpandedLycanthrope
                 {
                     foreach (Gene gene in pawn.genes?.GenesListForReading)
                     {
-                        if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { pawn.genes?.RemoveGene(gene); }
+                        if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { pawn.genes?.RemoveGene(gene); }
 
                     }
                 }
@@ -183,12 +187,12 @@ namespace VanillaRacesExpandedLycanthrope
 
                 foreach (Gene gene in pawn.genes.Endogenes)
                 {
-                    if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { this.endogenes.Add(gene.def); }
+                    if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { this.endogenes.Add(gene.def); }
 
                 }
                 foreach (Gene gene in pawn.genes.Xenogenes)
                 {
-                    if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { this.xenogenes.Add(gene.def); }
+                    if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { this.xenogenes.Add(gene.def); }
                 }
 
             
@@ -199,7 +203,7 @@ namespace VanillaRacesExpandedLycanthrope
                     foreach (Gene gene in pawn.genes.GenesListForReading)
                     {
                        
-                        if (!ContainsOfDef(morphedGenesToMaintain, gene.def)) { 
+                        if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { 
                             pawn.genes.RemoveGene(gene);
                           
                         }
@@ -234,7 +238,7 @@ namespace VanillaRacesExpandedLycanthrope
             pawn.genes.iconDef = null;
             for (int i = 0; i < xenotype.genes.Count; i++)
             {
-                if (!ContainsOfDef(morphedGenesToMaintain, xenotype.genes[i])) { pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable); }               
+                if (!Utils.ContainsOfDef(morphedGenesToMaintain, xenotype.genes[i])) { pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable); }               
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace VanillaRacesExpandedLycanthrope
@@ -13,14 +14,39 @@ namespace VanillaRacesExpandedLycanthrope
 
         public static bool XenotypeContainsGene(XenotypeDef xenotype, GeneDef geneDef)
         {
-            foreach(GeneDef gene in xenotype.AllGenes)
+            foreach (GeneDef gene in xenotype.AllGenes)
             {
-                if(gene == geneDef)
+                if (gene == geneDef)
                 {
                     return true;
                 }
             }
             return false;
+        }
+        public static bool ContainsOfDef(List<Gene> genes, GeneDef def)
+        {
+            foreach (Gene gene in genes)
+            {
+                if (gene.def == def)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+        public static bool ContainsAnyRelationOfDef(Pawn pawn, PawnRelationDef relation)
+        {
+            foreach (DirectPawnRelation directPawnRelation in pawn.relations.DirectRelations)
+            {
+                if (directPawnRelation.def == relation)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+
         }
     }
 }

@@ -299,18 +299,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abilities\CompAbilityEffect_Morph.cs" />
-    <Compile Include="Abilities\CompProperties_AbilityMorph.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_WarHowl.cs" />
+    <Compile Include="Abilities\Properties\CompProperties_WarHowl.cs" />
+    <Compile Include="Abilities\Properties\CompProperties_AbilityMorph.cs" />
     <Compile Include="DefModExtensions\MorphGeneDefExtension.cs" />
     <Compile Include="DefOfs\InternalDefOf.cs" />
     <Compile Include="Defs\MorphGeneTemplateDef.cs" />
     <Compile Include="Harmony\GeneDefGenerator_ImpliedGeneDefs.cs" />
     <Compile Include="Harmony\HarmonyInstance.cs" />
+    <Compile Include="Harmony\InteractionWorker_Interacted.cs" />
+    <Compile Include="Harmony\Pawn_InteractionsTracker_StartSocialFight.cs" />
+    <Compile Include="MapComponents\MapComponent_PackMentalityTracker.cs" />
     <Compile Include="MentalBreakWorkers\MentalBreakWorker_Photophobia.cs" />
     <Compile Include="MentalStates\MentalState_Photophobia.cs" />
+    <Compile Include="PawnRelationWorkers\PawnRelationWorker_PackMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\VanillaRacesExpandedLycanthrope_Settings.cs" />
     <Compile Include="Settings\VanillaRacesExpandedLycanthrope_settingsController.cs" />
+    <Compile Include="StaticCollections\StaticCollectionsClass.cs" />
     <Compile Include="ThoughtWorkers\ThoughtWorker_LightSensitivity.cs" />
+    <Compile Include="ThoughtWorkers\ThoughtWorker_PackMembers.cs" />
     <Compile Include="ThoughtWorkers\ThoughtWorker_Photophobia.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>

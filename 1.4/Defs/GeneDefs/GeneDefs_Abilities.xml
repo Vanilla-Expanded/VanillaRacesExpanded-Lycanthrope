@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef>
+		<defName>VRE_WarHowl</defName>
+		<label>war howl</label>
+		<description>todo.</description>
+		<iconPath>UI/Icons/Genes/Gene_Warhowl</iconPath>
+		<displayCategory>Ability</displayCategory>
+		<abilities>
+			<li>VRE_WarHowl</li>
+		</abilities>
+		<descriptionHyperlinks>
+			<AbilityDef>VRE_WarHowl</AbilityDef>
+		</descriptionHyperlinks>
+		<biostatMet>-2</biostatMet>
+	</GeneDef>
+</Defs>
