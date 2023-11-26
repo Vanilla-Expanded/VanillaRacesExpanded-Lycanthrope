@@ -3,7 +3,7 @@
 	<GeneDef>
 		<defName>VRE_LightSensitivity</defName>
 		<label>light sensitivity</label>
-		<description>todo.</description>
+		<description>Carriers of this gene have biological compounds in their eyes that react painfully to light photons. They are unusually sensitive to any light sources.</description>
 		<iconPath>UI/Icons/Genes/Gene_LightSensitivity</iconPath>
 		<displayOrderInCategory>500</displayOrderInCategory>
 		<dislikesSunlight>true</dislikesSunlight>
@@ -25,7 +25,7 @@
 	<GeneDef>
 		<defName>VRE_IntenseLightSensitivity</defName>
 		<label>intense light sensitivity</label>
-		<description>todo.</description>
+		<description>Carriers of this gene have biological compounds in their eyes that react dangerously to light photons. They are intensely sensitive to any light sources.</description>
 		<iconPath>UI/Icons/Genes/Gene_LightSensitivityIntense</iconPath>
 		<displayOrderInCategory>501</displayOrderInCategory>
 		<dislikesSunlight>true</dislikesSunlight>

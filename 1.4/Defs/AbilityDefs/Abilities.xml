@@ -57,9 +57,10 @@
 		<hotKey>Misc12</hotKey>
 		<verbProperties>
 			<verbClass>Verb_CastAbility</verbClass>
-			<warmupTime>0.5</warmupTime>
+			<warmupTime>2</warmupTime>
 			<drawAimPie>False</drawAimPie>
 			<requireLineOfSight>False</requireLineOfSight>
+			 <warmupEffecter>AnimalWarcall_Warmup</warmupEffecter>
 			<targetParams>
 				<canTargetSelf>true</canTargetSelf>
 				<canTargetPawns>false</canTargetPawns>

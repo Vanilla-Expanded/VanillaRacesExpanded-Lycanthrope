@@ -31,6 +31,8 @@ namespace VanillaRacesExpandedLycanthrope
 
         public static EffecterDef CocoonDestroyed;
 
+        public static SoundDef VRE_WarHowl_Cast;
+
         static InternalDefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(InternalDefOf));

@@ -4,7 +4,7 @@
 		<defName>VRE_MoveSpeed_ExtremelyQuick</defName>
 		<label>extremely fast runner</label>
 		<labelShortAdj>super fast</labelShortAdj>
-		<description>todo.</description>
+		<description>Carriers of this gene have a special type of muscle-stimulating cell that allows them to move at superhuman speeds.</description>
 		<iconPath>UI/Icons/Genes/Gene_ExtremelyFastRunner</iconPath>
 		<customEffectDescriptions>
 			<li>Colonist will ignore terrain movement costs</li>

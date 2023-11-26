@@ -3,7 +3,7 @@
 	<GeneDef>
 		<defName>VRE_WarHowl</defName>
 		<label>war howl</label>
-		<description>todo.</description>
+		<description>Carriers of this gene can perform a wicked warhowl, using a powerful bellow and psychic connection to call on their allies to fight more aggressively.</description>
 		<iconPath>UI/Icons/Genes/Gene_Warhowl</iconPath>
 		<displayCategory>Ability</displayCategory>
 		<abilities>

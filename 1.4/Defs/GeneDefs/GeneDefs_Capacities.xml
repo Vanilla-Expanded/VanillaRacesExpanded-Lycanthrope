@@ -3,7 +3,7 @@
 	<GeneDef>
 		<defName>VRE_SpeechInability</defName>
 		<label>speech inability</label>
-		<description>todo.</description>
+		<description>Carriers of this gene lost the ability to understand and partake in the act of talking.</description>
 		<iconPath>UI/Icons/Genes/Gene_SpeechInability</iconPath>
 		<displayOrderInCategory>500</displayOrderInCategory>
 		<capMods>

@@ -4,7 +4,7 @@
 		<defName>VRE_Nocturnal</defName>
 		<label>nocturnal</label>
 		
-		<description>todo.</description>
+		<description>Carriers of this gene prefer to work at night. They are happier if awake at nights and unhappy if awake during the day.</description>
 		<iconPath>UI/Icons/Genes/Gene_Nocturnal</iconPath>
 		<displayOrderInCategory>101</displayOrderInCategory>
 		<forcedTraits>

@@ -1,14 +1,10 @@
-﻿
-
-
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
 using System.Linq;
 using UnityEngine;
-
+using Verse.Sound;
 
 namespace VanillaRacesExpandedLycanthrope
 {
@@ -23,9 +19,11 @@ namespace VanillaRacesExpandedLycanthrope
 
             base.Apply(target, dest);
             Pawn pawn = target.Pawn;
-            if (pawn != null)
+            if (pawn != null && pawn.Map !=null)
             {
                 FleckMaker.AttachedOverlay(pawn, FleckDefOf.PsycastAreaEffect, Vector3.zero, 3f, -1f);
+                InternalDefOf.VRE_WarHowl_Cast.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map, false));
+
                 List<Pawn> list = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction);
 
                 foreach (Pawn item in list)

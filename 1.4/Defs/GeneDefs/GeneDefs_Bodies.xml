@@ -17,7 +17,7 @@
 		<defName>VRE_ChestFur</defName>
 		<label>chest fur</label>
 		
-		<description>todo.</description>
+		<description>Carriers of this gene grow thick fur on their chest.</description>
 		<biostatCpx>1</biostatCpx>
 		<biostatMet>0</biostatMet>
 		
