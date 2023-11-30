@@ -22,6 +22,7 @@ namespace VanillaRacesExpandedLycanthrope
         public static GeneDef VRE_Morphs_AdulthoodMorphing;
         public static GeneDef VRE_Morphs_SeasonalMorphing;
         public static GeneDef VRE_Morphs_DamageMorphing;
+        public static GeneDef VRE_Morphs_RandomMorphing;
         public static GeneDef VRE_Photophobia;
         public static GeneDef VRE_PackMentality;
 

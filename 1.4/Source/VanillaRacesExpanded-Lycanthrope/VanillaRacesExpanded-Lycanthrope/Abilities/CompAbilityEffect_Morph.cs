@@ -18,7 +18,7 @@ namespace VanillaRacesExpandedLycanthrope
     {
 
         public List<GeneDef> morphConditionGenes = new List<GeneDef>() { InternalDefOf.VRE_Morphs_AdulthoodMorphing,InternalDefOf.VRE_Morphs_NocturnalMorphing,
-        InternalDefOf.VRE_Morphs_SeasonalMorphing,InternalDefOf.VRE_Morphs_DamageMorphing};
+        InternalDefOf.VRE_Morphs_SeasonalMorphing,InternalDefOf.VRE_Morphs_DamageMorphing, InternalDefOf.VRE_Morphs_RandomMorphing};
 
         private new CompProperties_AbilityMorph Props => (CompProperties_AbilityMorph)props;
 
@@ -38,6 +38,9 @@ namespace VanillaRacesExpandedLycanthrope
 
         public XenotypeDef xenotype;
 
+        public int randomMorphTime = Rand.RangeInclusive(36, 2400);
+        public int randomMorphCounter = 0;
+
 
 
         public override void PostExposeData()
@@ -49,6 +52,8 @@ namespace VanillaRacesExpandedLycanthrope
             Scribe_Collections.Look(ref this.endogenes, nameof(this.endogenes), LookMode.Def);
             Scribe_Collections.Look(ref this.xenogenes, nameof(this.xenogenes), LookMode.Def);
             Scribe_Values.Look(ref this.xenotypeName, nameof(this.xenotypeName));
+            Scribe_Values.Look(ref this.randomMorphTime, nameof(this.randomMorphTime));
+            Scribe_Values.Look(ref this.randomMorphCounter, nameof(this.randomMorphCounter));
             Scribe_Defs.Look(ref this.xenotypeicon, nameof(this.xenotypeicon));
             Scribe_Defs.Look(ref this.xenotype, nameof(this.xenotype));
         }
@@ -316,6 +321,16 @@ namespace VanillaRacesExpandedLycanthrope
                             this.Apply(this.parent.pawn, null);
                             MorphConditionSwitch = false;
                         }
+                    }
+                }
+                if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_RandomMorphing))
+                {
+                    randomMorphCounter++;
+                    if(randomMorphCounter >= randomMorphTime)
+                    {
+                        randomMorphTime = Rand.RangeInclusive(36, 2400);
+                        this.Apply(this.parent.pawn, null);
+                        randomMorphCounter = 0;
                     }
                 }
             }
