@@ -63,6 +63,21 @@
 		
 		
 	</GeneDef>
-
+	<GeneDef>
+		<defName>VRE_Morphs_RandomMorphing</defName>
+		<label>random morphing</label>
+		<displayCategory>VRE_Morphs</displayCategory>
+		<description>Carriers of this gene undergo a morphing process seemingly at random. Nobody knows what the morphing condition is, or whether it can be controlled in any way. Morphing will occur in random time intervals.</description>
+		<iconPath>UI/Icons/Genes/Gene_MorphingRandom</iconPath>
+		<displayOrderInCategory>1004</displayOrderInCategory>
+		<exclusionTags>
+			<li>MorphCondition</li>		
+		</exclusionTags>
+		
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>2</biostatMet>
+		
+		
+	</GeneDef>
 
 </Defs>
