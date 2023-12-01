@@ -13,7 +13,12 @@ namespace VanillaRacesExpandedLycanthrope
             {
                 return false;
             }
-           
+
+            if(!pawn.HasActiveGene(InternalDefOf.VRE_PackMentality))
+            {
+                return false;
+            }
+
             else
             {
                 return ThoughtState.ActiveAtStage(0);

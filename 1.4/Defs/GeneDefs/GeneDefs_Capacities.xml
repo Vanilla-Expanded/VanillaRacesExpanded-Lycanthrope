@@ -15,5 +15,8 @@
 		<displayCategory>Healing</displayCategory>
 		<biostatCpx>1</biostatCpx>
 		<biostatMet>3</biostatMet>
+		<exclusionTags>
+			<li>VRE_ArrogantAndSpeechInability</li>
+		</exclusionTags>
 	</GeneDef>
 </Defs>
