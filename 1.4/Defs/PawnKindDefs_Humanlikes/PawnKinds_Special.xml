@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+
+  <PawnKindDef Name="VRE_WolfmenBase" Abstract="True">
+    <label>wolfmen</label>
+    <race>Human</race>
+    <xenotypeSet>
+      <xenotypeChances>
+        <VRE_Wolfman>999</VRE_Wolfman>
+      </xenotypeChances>
+    </xenotypeSet>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <combatPower>100</combatPower>
+    <backstoryCryptosleepCommonality>0.1</backstoryCryptosleepCommonality>
+    <chemicalAddictionChance>0.08</chemicalAddictionChance>
+    <isFighter>true</isFighter>
+    <chronologicalAgeRange>15~70</chronologicalAgeRange>
+    <initialResistanceRange>10~80</initialResistanceRange>
+    <initialWillRange>5~15</initialWillRange>
+    <apparelRequired>
+      <li>Apparel_Duster</li>
+      <li>Apparel_CollarShirt</li>
+      <li>Apparel_Pants</li>
+    </apparelRequired>
+    <requiredWorkTags>
+      <li>Social</li>
+      <li>Violent</li>
+    </requiredWorkTags>
+    <disallowedTraits>
+      <li>Immunity</li>
+    </disallowedTraits>
+  </PawnKindDef>
+
+
+
+  <PawnKindDef ParentName="VRE_WolfmenBase">
+    <defName>VRE_WolfmenPawnKindDef</defName>
+    <invNutrition>0.5</invNutrition>
+
+    <combatEnhancingDrugsChance>0.1</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>1~2</combatEnhancingDrugsCount>
+    <apparelMoney>500~700</apparelMoney>
+    <techHediffsChance>0.15</techHediffsChance>
+    <techHediffsMoney>0~1800</techHediffsMoney>
+    <techHediffsTags>
+      <li>Advanced</li>
+    </techHediffsTags>
+    <weaponMoney>600~800</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+      <li>MedievalMeleeDecent</li>
+    </weaponTags>
+    <apparelAllowHeadgearChance>0.1</apparelAllowHeadgearChance>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <apparelRequired Inherit="False">
+      <li>Apparel_Pants</li>
+    </apparelRequired>
+ 
+  </PawnKindDef>
+
+ 
+
+</Defs>

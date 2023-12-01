@@ -314,6 +314,7 @@
     <Compile Include="MentalStates\MentalState_Photophobia.cs" />
     <Compile Include="PawnRelationWorkers\PawnRelationWorker_PackMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestNodes\QuestNode_Root_LycanShip.cs" />
     <Compile Include="Settings\VanillaRacesExpandedLycanthrope_Settings.cs" />
     <Compile Include="Settings\VanillaRacesExpandedLycanthrope_settingsController.cs" />
     <Compile Include="StaticCollections\StaticCollectionsClass.cs" />

@@ -34,6 +34,10 @@ namespace VanillaRacesExpandedLycanthrope
 
         public static SoundDef VRE_WarHowl_Cast;
 
+        public static FactionDef VRE_WolfmenFaction;
+
+        public static PawnKindDef VRE_WolfmenPawnKindDef;
+
         static InternalDefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(InternalDefOf));

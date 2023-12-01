@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  
+
+  <FactionDef ParentName="FactionBase">
+    <defName>VRE_WolfmenFaction</defName>
+    <label>wolfmen</label>
+    <pawnSingular>wolfman</pawnSingular>
+    <pawnsPlural>wolfmen</pawnsPlural>
+    <categoryTag>VRE_WolfmenFaction</categoryTag>
+    <canMakeRandomly>false</canMakeRandomly>
+    <canSiege>false</canSiege>
+    <canStageAttacks>false</canStageAttacks>
+    <hidden>true</hidden>
+    <description>A wolfmen pack.</description>
+    <factionIconPath>World/WorldObjects/Expanding/SettlementTemporary</factionIconPath>
+    <factionNameMaker>NamerFactionOutlander</factionNameMaker>
+    <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+    <colorSpectrum>
+      <li>(0.93, 0.39, 0.32)</li>
+      <li>(0.35, 0.90, 0.57)</li>
+      <li>(0.25, 0.66, 0.94)</li>
+      <li>(0.98, 0.75, 0.37)</li>
+      <li>(0.97, 0.62, 0.52)</li>
+    </colorSpectrum>
+    <generateNewLeaderFromMapMembersOnly>true</generateNewLeaderFromMapMembersOnly>
+    <leaderTitle>pack leader</leaderTitle>
+    <requiredCountAtGameStart>0</requiredCountAtGameStart>
+    <mustStartOneEnemy>false</mustStartOneEnemy>
+    <maxCountAtGameStart>0</maxCountAtGameStart>
+    <techLevel>Spacer</techLevel>
+    <basicMemberKind>VRE_WolfmenPawnKindDef</basicMemberKind>
+    <allowedCultures>
+      <li>Astropolitan</li>
+    </allowedCultures>
+   
+    <disallowedPrecepts>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Strong_Subordinate</li> <!-- Never generate with any apparel precepts -->
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Soft_Subordinate</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Male_Mandatory</li> <!-- Never generate nudity precepts -->
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_Mandatory</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Male_CoveringAnythingButGroinDisapproved</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_CoveringAnythingButGroinDisapproved</li>
+    </disallowedPrecepts>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+    <allowedArrivalTemperatureRange>-15~45</allowedArrivalTemperatureRange>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Offworld</li>
+          <li>Outlander</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+  </FactionDef>
+
+</Defs>

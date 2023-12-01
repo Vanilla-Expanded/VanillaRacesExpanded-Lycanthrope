@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>VRE_WolfmenTransport</defName>
+    <hideInvolvedFactionsInfo>true</hideInvolvedFactionsInfo>
+    <expireDaysRange>2</expireDaysRange>
+    <rootMinPoints>300</rootMinPoints>
+    <rootSelectionWeight>0.5</rootSelectionWeight>
+    <minRefireDays>200</minRefireDays>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->[shipAdjective] [shipNoun]</li>
+        <li>shipAdjective->wolfmen</li>
+        <li>shipAdjective->wolf</li>
+        <li>shipAdjective->lycan</li>
+        <li>shipAdjective->werewolf</li>
+        <li>shipAdjective->nocturnal</li>
+        <li>shipAdjective->howling</li>
+        <li>shipAdjective->furry</li>
+        <li>shipAdjective->canine</li>
+        <li>shipNoun->ship</li>
+        <li>shipNoun->shuttle</li>
+        <li>shipNoun->craft</li>
+        <li>shipNoun->hulk</li>
+        <li>shipNoun->crash</li>
+        <li>shipNoun->wreck</li>
+
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->You have intercepted a distress signal! A shuttle carrying a group of wolfmen refugees is having trouble with staying airborne. Their leader, alongside [WolfmenCount] other refugees is begging you to allow them to crash near [map_definite]. \n\nOnce the ship has crashed, wolfmen will try to regroup and venture on. They offer to transform one of your colonists into a wolfman if you allow them to crash near you. You can also use this opportunity to fight or arrest them. If you can capture any of them, you can force them to turn one of your colonists into a wolfman.\n\n[wolfmenInfo]</li>
+
+        <li>wolfmenInfo->(*Gray)About wolfmen: Wolfmen have propagated unimpeded throughout colonized space to stake territorial claims and establish packs or larger clans. Their wolfman form has diminished nocturnal abilities, trading many advantages in exchange for being able to share their xenogerm with others. Their lycan form, on the other hand, has nocturnal advantages, improved close combat effectiveness, supernatural speed and regeneration, and an invigorating howl that impedes speech which improves further as more pack members join in.(/Gray)</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questContentRules>
+      <rulesStrings>
+        <li>wolfmanShuttleCrashedLetterLabel->Crashed shuttle</li>
+        <li>wolfmanShuttleCrashedLetterText->A shuttle containing a wolfman leader and [WolfmenCount] wolfmen refugees has crashed nearby. They will exit the crashed craft and prepare to venture on.</li>
+
+        <li>reinforcementsArrivedLetterLabel->Wolfmen reinforcements</li>
+        <li>reinforcementsArrivedLetterText->Wolfmen are arriving in drop pods to reinforce the crashed refugees.</li>
+
+        <li>letterLabelBeggarsBetrayed->Betrayed refugees</li>
+        <li>letterTextBeggarsBetrayed->The wolfmen refugees are betrayed by your actions and will try to defend themselves.</li>
+      </rulesStrings>
+    </questContentRules>
+    <root Class="VanillaRacesExpandedLycanthrope.QuestNode_Root_LycanShip" />
+  </QuestScriptDef>
+
+</Defs>
