@@ -17,6 +17,7 @@
 		<biostatMet>3</biostatMet>
 		<exclusionTags>
 			<li>VRE_ArrogantAndSpeechInability</li>
+			<li>VRE_ExtremelyAggressiveAndSpeechInability</li>
 		</exclusionTags>
 	</GeneDef>
 </Defs>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Races Expanded - Archon</li>
+		</mods>
+		<match Class="PatchOperationConditional">
+			<success>Always</success>
+			<xpath>/Defs/GeneDef[defName = "VRE_Aggression_ExtremelyAggressive"]/exclusionTags</xpath>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/GeneDef[defName = "VRE_Aggression_ExtremelyAggressive"]</xpath>
+				<value>
+					<exclusionTags>
+						<li>VRE_ExtremelyAggressiveAndSpeechInability</li>
+					</exclusionTags>
+				</value>
+			</nomatch>
+			<match Class="PatchOperationAdd">
+				<xpath>/Defs/GeneDef[defName = "VRE_Aggression_ExtremelyAggressive"]/exclusionTags</xpath>
+				<value>
+					<li>VRE_ExtremelyAggressiveAndSpeechInability</li>
+				</value>
+			</match>
+		</match>
+	</Operation>
+</Patch>
+
