@@ -29,7 +29,7 @@ namespace VanillaRacesExpandedLycanthrope
             MorphGeneTemplateDef template = InternalDefOf.VRE_Morphs;
 
             List <XenotypeDef> listOfXenotypes = DefDatabase<XenotypeDef>.AllDefs.Where(element => !Utils.XenotypeContainsGene(element,DefDatabase<GeneDef>.GetNamedSilentFail("VREA_Power"))
-            && element.defName!= "AG_RandomCustom" &&element!=XenotypeDefOf.Baseliner).ToList();
+            && element.defName!= "AG_RandomCustom").ToList();
 
          
 

@@ -299,9 +299,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abilities\CompAbilityEffect_Morph.cs" />
+    <Compile Include="Abilities\CompAbilityEffect_ReimplantGermline.cs" />
     <Compile Include="Abilities\CompAbilityEffect_WarHowl.cs" />
+    <Compile Include="Abilities\Properties\CompProperties_AbilityReimplantGermline.cs" />
     <Compile Include="Abilities\Properties\CompProperties_WarHowl.cs" />
     <Compile Include="Abilities\Properties\CompProperties_AbilityMorph.cs" />
+    <Compile Include="AI\JobDriver_AbsorbGermline.cs" />
     <Compile Include="DefModExtensions\MorphGeneDefExtension.cs" />
     <Compile Include="DefOfs\InternalDefOf.cs" />
     <Compile Include="Defs\MorphGeneTemplateDef.cs" />

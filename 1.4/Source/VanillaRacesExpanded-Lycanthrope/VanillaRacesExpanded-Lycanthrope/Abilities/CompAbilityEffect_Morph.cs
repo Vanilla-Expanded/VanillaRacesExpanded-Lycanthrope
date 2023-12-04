@@ -87,7 +87,7 @@ namespace VanillaRacesExpandedLycanthrope
             {
                Effecter effecter = InternalDefOf.CocoonDestroyed.SpawnAttached(pawn, pawn.Map);
                effecter.Trigger(pawn,null);
-               for (int i = 0; i < 20; i++)
+               for (int i = 0; i < 5; i++)
                 {
                     IntVec3 c;
                     CellFinder.TryFindRandomReachableCellNear(pawn.Position, pawn.Map, 2, TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Deadly, false), null, null, out c);
@@ -276,9 +276,10 @@ namespace VanillaRacesExpandedLycanthrope
                 if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_AdulthoodMorphing))
                 {
 
-                    if (this.parent.pawn.ageTracker.AgeBiologicalYears >= 16)
+                    if (!MorphConditionSwitch&&this.parent.pawn.ageTracker.AgeBiologicalYears >= 16)
                     {
                         this.Apply(this.parent.pawn, null);
+                        MorphConditionSwitch = true;
                     }
                 }
                 if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_SeasonalMorphing))
@@ -306,7 +307,7 @@ namespace VanillaRacesExpandedLycanthrope
                 {
 
                     float pawnHealth = this.parent.pawn.health.summaryHealth.SummaryHealthPercent;
-                    if (pawnHealth < 0.40)
+                    if (pawnHealth < 0.60)
                     {
                         if (!MorphConditionSwitch)
                         {

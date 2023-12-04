@@ -52,7 +52,7 @@
 		<label>damage morphing</label>
 		<displayCategory>VRE_Morphs</displayCategory>
 		<description>Carriers of this gene undergo a morphing process when badly wounded, and will only morph back when almost fully regenerated.</description>
-		<iconPath>UI/Icons/Genes/Gene_MorphingNocturnal</iconPath>
+		<iconPath>UI/Icons/Genes/Gene_MorphingDamage</iconPath>
 		<displayOrderInCategory>1003</displayOrderInCategory>
 		<exclusionTags>
 			<li>MorphCondition</li>		

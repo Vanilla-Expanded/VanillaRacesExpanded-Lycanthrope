@@ -14,4 +14,20 @@
 		</descriptionHyperlinks>
 		<biostatMet>-2</biostatMet>
 	</GeneDef>
+	<GeneDef>
+		<defName>VRE_GermlineReimplanter</defName>
+		<label>germline reimplanter</label>
+		<labelShortAdj>reimplanter</labelShortAdj>
+		<description>Carriers of this gene can implant a copy of their germline into another person through an injector organ. Their own genetic material will then regrow very slowly. If they implant while their genes are regrowing, they will die. Xenogenes will be unaffected.</description>
+		<iconPath>UI/Icons/Genes/Gene_GermlineReimplanter</iconPath>
+		<displayCategory>Archite</displayCategory>
+		<abilities>
+			<li>VRE_ReimplantGermline</li>
+		</abilities>
+		<descriptionHyperlinks>
+			<AbilityDef>VRE_ReimplantGermline</AbilityDef>
+		</descriptionHyperlinks>
+		<biostatCpx>3</biostatCpx>
+		<biostatArc>1</biostatArc>
+	</GeneDef>
 </Defs>

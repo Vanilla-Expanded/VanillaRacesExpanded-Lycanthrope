@@ -22,6 +22,10 @@
 			</li>
 			
 		</conditionalStatAffecters>
+		<exclusionTags>
+			<li>VRE_SuperiorDarkVision</li>
+			
+		</exclusionTags>
 		<symbolPack>
 			<prefixSymbols>
 				<li>

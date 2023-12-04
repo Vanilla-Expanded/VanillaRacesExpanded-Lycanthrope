@@ -25,10 +25,13 @@ namespace VanillaRacesExpandedLycanthrope
         public static GeneDef VRE_Morphs_RandomMorphing;
         public static GeneDef VRE_Photophobia;
         public static GeneDef VRE_PackMentality;
+        public static GeneDef VRE_GermlineReimplanter;
 
         public static PawnRelationDef VRE_PackMember;
 
         public static HediffDef VRE_WarHowlHediff;
+        public static HediffDef VRE_EndogerminationComa;
+        public static HediffDef VRE_EndogermLossShock;
 
         public static EffecterDef CocoonDestroyed;
 
@@ -37,6 +40,8 @@ namespace VanillaRacesExpandedLycanthrope
         public static FactionDef VRE_WolfmenFaction;
 
         public static PawnKindDef VRE_WolfmenPawnKindDef;
+
+        public static JobDef VRE_AbsorbGermline;
 
         static InternalDefOf()
         {

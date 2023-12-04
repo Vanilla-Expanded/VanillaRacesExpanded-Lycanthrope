@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
-
-
 	<VRE_DisablePhotophobiaMessage>Disable photophobia message</VRE_DisablePhotophobiaMessage>
 	<VRE_DisablePhotophobiaMessage_Description>By default, every time a pawn with the photophobia gene fless from light the game will generate a letter informing the player. This may be a bit too much if you have many pawns fleeing often, so you can disable it with this toggle. Bear in mind the pawns will still flee, you'll just NOT get informed.</VRE_DisablePhotophobiaMessage_Description>
 	<VRE_OnlyOnDaytime>This quest can only be accepted during daytime</VRE_OnlyOnDaytime>
-
-
+	<VRE_MessagePawnHasNoGermline>{0_labelShort} has no available endogenes to implant.</VRE_MessagePawnHasNoGermline>
+	<VRE_WarningPawnWillDieFromReimplanting>Warning: {PAWN_nameDef}'s genes are currently regrowing. If {PAWN_pronoun} implants {PAWN_possessive} germline before {PAWN_possessive} genes are fully regrown, it will kill {PAWN_objective}.\n\nAre you sure you wish to continue?</VRE_WarningPawnWillDieFromReimplanting>
+	<VRE_LetterTextGenesImplanted>{CASTER_nameDef} has implanted a copy of {CASTER_possessive} germline into {TARGET_nameDef}, passing all endogenes onto {TARGET_objective}.\n\n{TARGET_nameDef} will be in an endogermination coma for the next {COMADURATION} while {TARGET_possessive} body adjusts to the changes.\n\n{CASTER_nameDef} will suffer from gene loss shock for the next {SHOCKDURATION}. {CASTER_possessive} genes will also need to regrow. This process takes time. If {CASTER_nameDef} implants {CASTER_possessive} germline again before {CASTER_possessive} genes have regrown, {CASTER_pronoun} will die.</VRE_LetterTextGenesImplanted>
+	<VRE_ForceGermlineImplantation>Force germline implantation</VRE_ForceGermlineImplantation>
+	<VRE_ForceGermlineImplantationDesc>Force this person to implant their germline into another individual using a special injector organ. If this person's genes are currently regrowing, they will die in the process.\n\nWhen implanted, a germline will overwrite the target's endogenes. Xenogenes will be unaffected.</VRE_ForceGermlineImplantationDesc>
+	<VRE_MessageAbsorbingGermlineWillAngerFaction>Absorbing {PAWN_nameDef}'s germline will anger {0}.</VRE_MessageAbsorbingGermlineWillAngerFaction>
+	<VRE_EndogeneLossShockPresent>{PAWN_nameDef} suffering from endogene loss shock</VRE_EndogeneLossShockPresent>
+	<VRE_MessageTargetMustBeDownedToForceReimplant>{PAWN_nameDef} must be downed before you can force {PAWN_objective} to reimplant {PAWN_possessive} germline.</VRE_MessageTargetMustBeDownedToForceReimplant>
 </LanguageData>
