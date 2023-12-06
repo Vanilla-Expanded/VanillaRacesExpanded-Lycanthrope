@@ -54,6 +54,7 @@
 			<verbClass>Verb_CastAbility</verbClass>
 			<warmupTime>2</warmupTime>
 			<drawAimPie>False</drawAimPie>
+			<range>10</range>
 			<requireLineOfSight>False</requireLineOfSight>
 			<warmupEffecter>AnimalWarcall_Warmup</warmupEffecter>
 			<targetParams>

@@ -292,6 +292,10 @@
       <HintPath>..\..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="VanillaRacesExpandedHighmate">
+      <HintPath>References\VanillaRacesExpandedHighmate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="VFECore">
       <HintPath>References\VFECore.dll</HintPath>
       <Private>False</Private>

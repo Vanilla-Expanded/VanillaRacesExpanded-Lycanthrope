@@ -44,7 +44,7 @@ namespace VanillaRacesExpandedLycanthrope
             Map map = QuestGen_Get.GetMap();
            
             float x = slate.Get("points", 0f);
-            int endTicks = 5240;
+
             string questTagToAdd = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("VRE_WolfmenTransport");
             string attackedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.TookDamageFromPlayer");
             string defendTimeoutSignal = QuestGen.GenerateNewSignal("DefendTimeout");

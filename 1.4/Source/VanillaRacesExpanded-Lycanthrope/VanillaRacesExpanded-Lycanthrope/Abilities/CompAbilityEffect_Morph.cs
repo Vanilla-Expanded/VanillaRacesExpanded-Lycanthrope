@@ -8,6 +8,7 @@ using RimWorld.Planet;
 using Verse;
 using System.Linq;
 using Verse.Sound;
+using VanillaRacesExpandedHighmate;
 
 
 
@@ -41,12 +42,22 @@ namespace VanillaRacesExpandedLycanthrope
         public int randomMorphTime = Rand.RangeInclusive(36, 2400);
         public int randomMorphCounter = 0;
 
+        public float hemogenValueForm1 = -1;
+        public float hemogenValueForm2 = -1;
 
+        public float DeathrestValueForm1 = -1;
+        public float DeathrestValueForm2 = -1;
+
+        public float killThirstValueForm1 = -1;
+        public float killThirstValueForm2 = -1;
+
+        public float lovinValueForm1 = -1;
+        public float lovinValueForm2 = -1;
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Collections.Look<Gene>(ref morphedGenesToMaintain, nameof(morphedGenesToMaintain),LookMode.Reference);
+            Scribe_Collections.Look<Gene>(ref morphedGenesToMaintain, nameof(morphedGenesToMaintain), LookMode.Reference);
             Scribe_Values.Look(ref MorphConditionSwitch, nameof(MorphConditionSwitch));
             Scribe_Values.Look(ref morphed, nameof(morphed));
             Scribe_Collections.Look(ref this.endogenes, nameof(this.endogenes), LookMode.Def);
@@ -56,6 +67,14 @@ namespace VanillaRacesExpandedLycanthrope
             Scribe_Values.Look(ref this.randomMorphCounter, nameof(this.randomMorphCounter));
             Scribe_Defs.Look(ref this.xenotypeicon, nameof(this.xenotypeicon));
             Scribe_Defs.Look(ref this.xenotype, nameof(this.xenotype));
+            Scribe_Values.Look(ref this.hemogenValueForm1, nameof(this.hemogenValueForm1));
+            Scribe_Values.Look(ref this.hemogenValueForm2, nameof(this.hemogenValueForm2));
+            Scribe_Values.Look(ref this.DeathrestValueForm1, nameof(this.DeathrestValueForm1));
+            Scribe_Values.Look(ref this.DeathrestValueForm2, nameof(this.DeathrestValueForm2));
+            Scribe_Values.Look(ref this.killThirstValueForm1, nameof(this.killThirstValueForm1));
+            Scribe_Values.Look(ref this.killThirstValueForm2, nameof(this.killThirstValueForm2));
+            Scribe_Values.Look(ref this.lovinValueForm1, nameof(this.lovinValueForm1));
+            Scribe_Values.Look(ref this.lovinValueForm2, nameof(this.lovinValueForm2));
         }
 
         public override bool ShouldHideGizmo
@@ -74,20 +93,108 @@ namespace VanillaRacesExpandedLycanthrope
 
         }
 
-        
+        public void StoreNeedValues(int form, Pawn pawn, bool storeOrRestore)
+        {
+            Gene_Hemogen gene_Hemogen = pawn.genes?.GetFirstGeneOfType<Gene_Hemogen>();
+
+            if (form == 1)
+            {
+                if (gene_Hemogen != null)
+                {
+                    if (storeOrRestore){hemogenValueForm1 = gene_Hemogen.Value;}
+                    else{gene_Hemogen.Value = hemogenValueForm2;}
+                }
+            }
+            else if (form == 2)
+            {
+                if (gene_Hemogen != null)
+                {
+                    if (storeOrRestore){hemogenValueForm2 = gene_Hemogen.Value;}
+                    else {gene_Hemogen.Value = hemogenValueForm1;}
+                }
+            }
+
+            Gene_Deathrest gene_Deathrest = pawn.genes?.GetFirstGeneOfType<Gene_Deathrest>();
+
+            if (form == 1)
+            {
+                if (gene_Deathrest != null)
+                {
+                    if (storeOrRestore) { DeathrestValueForm1 = gene_Deathrest.DeathrestNeed.CurLevel; }
+                    else { gene_Deathrest.DeathrestNeed.CurLevel = DeathrestValueForm2; }
+                }
+            }
+            else if (form == 2)
+            {
+                if (gene_Deathrest != null)
+                {
+                    if (storeOrRestore) { DeathrestValueForm2 = gene_Deathrest.DeathrestNeed.CurLevel; }
+                    else { gene_Deathrest.DeathrestNeed.CurLevel = DeathrestValueForm1; }
+                }
+            }
+
+            Need_KillThirst killthirst = pawn.needs?.TryGetNeed<Need_KillThirst>();
+
+            if (form == 1)
+            {
+                if (killthirst != null)
+                {
+                    if (storeOrRestore) { killThirstValueForm1 = killthirst.CurLevel; }
+                    else { killthirst.CurLevel = killThirstValueForm2; }
+                }
+            }
+            else if (form == 2)
+            {
+                if (killthirst != null)
+                {
+                    if (storeOrRestore) { killThirstValueForm2 = killthirst.CurLevel; }
+                    else { killthirst.CurLevel = killThirstValueForm1; }
+                }
+            }
+           /* try {
+                if (ModLister.HasActiveModWithName("Vanilla Races Expanded - Highmate"))
+                {
+                    Need_Lovin lovin = pawn.needs?.TryGetNeed<Need_Lovin>();
+
+                    if (form == 1)
+                    {
+                        if (lovin != null)
+                        {
+                            if (storeOrRestore) { lovinValueForm1 = lovin.CurLevel; }
+                            else { lovin.CurLevel = lovinValueForm2; }
+                        }
+                    }
+                    else if (form == 2)
+                    {
+                        if (lovin != null)
+                        {
+                            if (storeOrRestore) { lovinValueForm2 = lovin.CurLevel; }
+                            else { lovin.CurLevel = lovinValueForm1; }
+                        }
+                    }
+                }
+            }catch { }*/
+            
+
+        }
+
+       
+
+
+
 
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
 
 
-          
+
             Pawn pawn = parent.pawn;
             if (pawn.Map != null)
             {
-               Effecter effecter = InternalDefOf.CocoonDestroyed.SpawnAttached(pawn, pawn.Map);
-               effecter.Trigger(pawn,null);
-               for (int i = 0; i < 5; i++)
+                Effecter effecter = InternalDefOf.CocoonDestroyed.SpawnAttached(pawn, pawn.Map);
+                effecter.Trigger(pawn, null);
+                for (int i = 0; i < 5; i++)
                 {
                     IntVec3 c;
                     CellFinder.TryFindRandomReachableCellNear(pawn.Position, pawn.Map, 2, TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Deadly, false), null, null, out c);
@@ -97,7 +204,7 @@ namespace VanillaRacesExpandedLycanthrope
 
                 SoundDefOf.Hive_Spawn.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map, false));
             }
-            
+
             List<Gene> genes = pawn.genes?.GenesListForReading;
 
             morphedGenesToMaintain.Clear();
@@ -108,7 +215,7 @@ namespace VanillaRacesExpandedLycanthrope
                 {
                     if (gene.def.defName.Contains("VRE_Morphs"))
                     {
-                        if(!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def))
+                        if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def))
                         {
                             if (gene.Active)
                             {
@@ -128,21 +235,23 @@ namespace VanillaRacesExpandedLycanthrope
                     }
                 }
             }
-            
+
 
             // Morph from 1 to 2
 
             if (!morphed)
             {
-                morphed=true;
-              
+                morphed = true;
+
+                StoreNeedValues(1, pawn,true);
+
                 List<GeneDef> endogenes = new List<GeneDef>();
                 List<GeneDef> xenogenes = new List<GeneDef>();
 
                 foreach (Gene gene in pawn.genes.Endogenes)
                 {
                     if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { endogenes.Add(gene.def); }
-                        
+
                 }
                 foreach (Gene gene in pawn.genes.Xenogenes)
                 {
@@ -156,7 +265,7 @@ namespace VanillaRacesExpandedLycanthrope
                 this.xenotypeName = pawn.genes.xenotypeName;
                 this.xenotypeicon = pawn.genes.iconDef;
 
-              
+
 
                 if (pawn.genes?.GenesListForReading.Count > 0)
                 {
@@ -167,7 +276,7 @@ namespace VanillaRacesExpandedLycanthrope
                     }
                 }
                 SetXenotypeNoClearing(pawn, xenotype);
-
+                StoreNeedValues(1, pawn,false);
             }
 
             // Morph back from 2 to 1
@@ -176,7 +285,7 @@ namespace VanillaRacesExpandedLycanthrope
             {
                 morphed = false;
 
-               
+                StoreNeedValues(2, pawn,true);
 
                 List<GeneDef> modifiedEndogenes = new List<GeneDef>();
                 List<GeneDef> modifiedXenogenes = new List<GeneDef>();
@@ -200,17 +309,18 @@ namespace VanillaRacesExpandedLycanthrope
                     if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { this.xenogenes.Add(gene.def); }
                 }
 
-            
+
 
                 if (pawn.genes.GenesListForReading.Count > 0)
                 {
-                   
+
                     foreach (Gene gene in pawn.genes.GenesListForReading)
                     {
-                       
-                        if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def)) { 
+
+                        if (!Utils.ContainsOfDef(morphedGenesToMaintain, gene.def))
+                        {
                             pawn.genes.RemoveGene(gene);
-                          
+
                         }
                     }
                 }
@@ -232,7 +342,7 @@ namespace VanillaRacesExpandedLycanthrope
                 pawn.genes.xenotypeName = modifiedXenotype;
                 pawn.genes.iconDef = modifiedIcon;
 
-                
+                StoreNeedValues(2, pawn,false);
             }
         }
 
@@ -243,7 +353,7 @@ namespace VanillaRacesExpandedLycanthrope
             pawn.genes.iconDef = null;
             for (int i = 0; i < xenotype.genes.Count; i++)
             {
-                if (!Utils.ContainsOfDef(morphedGenesToMaintain, xenotype.genes[i])) { pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable); }               
+                if (!Utils.ContainsOfDef(morphedGenesToMaintain, xenotype.genes[i])) { pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable); }
             }
         }
 
@@ -259,13 +369,14 @@ namespace VanillaRacesExpandedLycanthrope
                     float currentTime = GenLocalDate.DayTick(this.parent.pawn);
                     if (currentTime > 45000 || currentTime < 15000)
                     {
-                        if (!MorphConditionSwitch) {
+                        if (!MorphConditionSwitch)
+                        {
                             this.Apply(this.parent.pawn, null);
                             MorphConditionSwitch = true;
-                        }                      
+                        }
                     }
                     else
-                    { 
+                    {
                         if (MorphConditionSwitch)
                         {
                             this.Apply(this.parent.pawn, null);
@@ -276,7 +387,7 @@ namespace VanillaRacesExpandedLycanthrope
                 if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_AdulthoodMorphing))
                 {
 
-                    if (!MorphConditionSwitch&&this.parent.pawn.ageTracker.AgeBiologicalYears >= 16)
+                    if (!MorphConditionSwitch && this.parent.pawn.ageTracker.AgeBiologicalYears >= 16)
                     {
                         this.Apply(this.parent.pawn, null);
                         MorphConditionSwitch = true;
@@ -315,7 +426,7 @@ namespace VanillaRacesExpandedLycanthrope
                             MorphConditionSwitch = true;
                         }
                     }
-                    else if(pawnHealth > 0.80)
+                    else if (pawnHealth > 0.80)
                     {
                         if (MorphConditionSwitch)
                         {
@@ -327,7 +438,7 @@ namespace VanillaRacesExpandedLycanthrope
                 if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_RandomMorphing))
                 {
                     randomMorphCounter++;
-                    if(randomMorphCounter >= randomMorphTime)
+                    if (randomMorphCounter >= randomMorphTime)
                     {
                         randomMorphTime = Rand.RangeInclusive(36, 2400);
                         this.Apply(this.parent.pawn, null);
