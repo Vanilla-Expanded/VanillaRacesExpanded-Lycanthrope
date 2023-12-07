@@ -1,16 +1,8 @@
-﻿
-
-
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RimWorld;
-using RimWorld.Planet;
 using Verse;
-using System.Linq;
 using Verse.Sound;
-using VanillaRacesExpandedHighmate;
-
-
+using System;
 
 namespace VanillaRacesExpandedLycanthrope
 {
@@ -42,17 +34,17 @@ namespace VanillaRacesExpandedLycanthrope
         public int randomMorphTime = Rand.RangeInclusive(36, 2400);
         public int randomMorphCounter = 0;
 
-        public float hemogenValueForm1 = -1;
-        public float hemogenValueForm2 = -1;
+        public float hemogenValueForm1 = 1;
+        public float hemogenValueForm2 = 1;
 
-        public float DeathrestValueForm1 = -1;
-        public float DeathrestValueForm2 = -1;
+        public float DeathrestValueForm1 = 1;
+        public float DeathrestValueForm2 = 1;
 
-        public float killThirstValueForm1 = -1;
-        public float killThirstValueForm2 = -1;
+        public float killThirstValueForm1 = 1;
+        public float killThirstValueForm2 = 1;
 
-        public float lovinValueForm1 = -1;
-        public float lovinValueForm2 = -1;
+        public float lovinValueForm1 = 1;
+        public float lovinValueForm2 = 1;
 
         public override void PostExposeData()
         {
@@ -101,16 +93,16 @@ namespace VanillaRacesExpandedLycanthrope
             {
                 if (gene_Hemogen != null)
                 {
-                    if (storeOrRestore){hemogenValueForm1 = gene_Hemogen.Value;}
-                    else{gene_Hemogen.Value = hemogenValueForm2;}
+                    if (storeOrRestore) { hemogenValueForm1 = gene_Hemogen.Value; }
+                    else { gene_Hemogen.Value = hemogenValueForm2; }
                 }
             }
             else if (form == 2)
             {
                 if (gene_Hemogen != null)
                 {
-                    if (storeOrRestore){hemogenValueForm2 = gene_Hemogen.Value;}
-                    else {gene_Hemogen.Value = hemogenValueForm1;}
+                    if (storeOrRestore) { hemogenValueForm2 = gene_Hemogen.Value; }
+                    else { gene_Hemogen.Value = hemogenValueForm1; }
                 }
             }
 
@@ -151,38 +143,33 @@ namespace VanillaRacesExpandedLycanthrope
                     else { killthirst.CurLevel = killThirstValueForm1; }
                 }
             }
-           /* try {
-                if (ModLister.HasActiveModWithName("Vanilla Races Expanded - Highmate"))
+
+            try
+            {
+                ((Action)(() =>
                 {
-                    Need_Lovin lovin = pawn.needs?.TryGetNeed<Need_Lovin>();
+                    if (ModLister.HasActiveModWithName("Vanilla Races Expanded - Highmate"))
+                    {
+                        if (VanillaRacesExpandedHighmate.Utils.HasLovinNeed(pawn))
+                        {
+                            if (form == 1)
+                            {
+                                if (storeOrRestore) { lovinValueForm1 = VanillaRacesExpandedHighmate.Utils.GetLovinNeed(pawn); }
+                                else { VanillaRacesExpandedHighmate.Utils.SetLovinNeed(pawn, lovinValueForm2); }
+                            }
+                            else if (form == 2)
+                            {
+                                if (storeOrRestore) { lovinValueForm2 = VanillaRacesExpandedHighmate.Utils.GetLovinNeed(pawn); }
+                                else { VanillaRacesExpandedHighmate.Utils.SetLovinNeed(pawn, lovinValueForm1); }
+                            }
+                        }
+                    }
+                }))();
+            }
+            catch (TypeLoadException) { }
 
-                    if (form == 1)
-                    {
-                        if (lovin != null)
-                        {
-                            if (storeOrRestore) { lovinValueForm1 = lovin.CurLevel; }
-                            else { lovin.CurLevel = lovinValueForm2; }
-                        }
-                    }
-                    else if (form == 2)
-                    {
-                        if (lovin != null)
-                        {
-                            if (storeOrRestore) { lovinValueForm2 = lovin.CurLevel; }
-                            else { lovin.CurLevel = lovinValueForm1; }
-                        }
-                    }
-                }
-            }catch { }*/
             
-
         }
-
-       
-
-
-
-
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
@@ -243,7 +230,7 @@ namespace VanillaRacesExpandedLycanthrope
             {
                 morphed = true;
 
-                StoreNeedValues(1, pawn,true);
+                StoreNeedValues(1, pawn, true);
 
                 List<GeneDef> endogenes = new List<GeneDef>();
                 List<GeneDef> xenogenes = new List<GeneDef>();
@@ -276,7 +263,7 @@ namespace VanillaRacesExpandedLycanthrope
                     }
                 }
                 SetXenotypeNoClearing(pawn, xenotype);
-                StoreNeedValues(1, pawn,false);
+                StoreNeedValues(1, pawn, false);
             }
 
             // Morph back from 2 to 1
@@ -285,7 +272,7 @@ namespace VanillaRacesExpandedLycanthrope
             {
                 morphed = false;
 
-                StoreNeedValues(2, pawn,true);
+                StoreNeedValues(2, pawn, true);
 
                 List<GeneDef> modifiedEndogenes = new List<GeneDef>();
                 List<GeneDef> modifiedXenogenes = new List<GeneDef>();
@@ -342,7 +329,7 @@ namespace VanillaRacesExpandedLycanthrope
                 pawn.genes.xenotypeName = modifiedXenotype;
                 pawn.genes.iconDef = modifiedIcon;
 
-                StoreNeedValues(2, pawn,false);
+                StoreNeedValues(2, pawn, false);
             }
         }
 
@@ -418,7 +405,7 @@ namespace VanillaRacesExpandedLycanthrope
                 {
 
                     float pawnHealth = this.parent.pawn.health.summaryHealth.SummaryHealthPercent;
-                    if (pawnHealth < 0.60)
+                    if (pawnHealth < 0.80)
                     {
                         if (!MorphConditionSwitch)
                         {
@@ -426,7 +413,7 @@ namespace VanillaRacesExpandedLycanthrope
                             MorphConditionSwitch = true;
                         }
                     }
-                    else if (pawnHealth > 0.80)
+                    else if (pawnHealth > 0.90)
                     {
                         if (MorphConditionSwitch)
                         {

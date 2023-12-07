@@ -39,7 +39,7 @@
 		<defName>VRE_WarHowl</defName>
 		<label>war howl</label>
 		<cooldownTicksRange>60000</cooldownTicksRange>
-		<description>Emit a loud war howl that increases stacking combat capabilities of pack members nearby.</description>
+		<description>Emit a loud war howl that increases stacking combat capabilities of allies nearby.</description>
 		<iconPath>UI/Icons/Abilities/Warhowl</iconPath>
 		<aiCanUse>true</aiCanUse>
 		<jobDef>CastAbilityOnThing</jobDef>

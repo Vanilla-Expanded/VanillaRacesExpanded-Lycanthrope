@@ -295,6 +295,7 @@
     <Reference Include="VanillaRacesExpandedHighmate">
       <HintPath>References\VanillaRacesExpandedHighmate.dll</HintPath>
       <Private>False</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="VFECore">
       <HintPath>References\VFECore.dll</HintPath>

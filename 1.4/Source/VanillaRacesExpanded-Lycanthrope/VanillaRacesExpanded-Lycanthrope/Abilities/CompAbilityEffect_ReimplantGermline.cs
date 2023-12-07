@@ -109,14 +109,7 @@ namespace VanillaRacesExpandedLycanthrope
                 }
                 return false;
             }
-            if (GeneUtility.SameXenotype(pawn, parent.pawn))
-            {
-                if (throwMessages)
-                {
-                    Messages.Message("MessageCannotUseOnSameXenotype".Translate(pawn), pawn, MessageTypeDefOf.RejectInput, historical: false);
-                }
-                return false;
-            }
+            
             if (!PawnIdeoCanAcceptReimplant(parent.pawn, pawn))
             {
                 if (throwMessages)
