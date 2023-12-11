@@ -41,9 +41,9 @@
 		<graphicData>
 			<graphicPath>Things/Pawn/Humanlike/BodyAttachments/WolfTail/WolfTail</graphicPath>
 			<colorType>Hair</colorType>
-			<drawOffsetNorth>(0, 0.2, -0.25)</drawOffsetNorth>
-			<drawOffsetSouth>(0, -0.1, -0.25)</drawOffsetSouth>
-			<drawOffsetEast>(0, -0.1, -0.15)</drawOffsetEast>
+			 <drawOffsetNorth>(0, 0.2, -0.25)</drawOffsetNorth>
+      <drawOffsetSouth>(0, -0.1, -0.25)</drawOffsetSouth>
+      <drawOffsetEast>(-0.5, -0.1, -0.15)</drawOffsetEast>
 		</graphicData>
 	</GeneDef>
 	<GeneDef ParentName="GeneBeardStyleBase">
