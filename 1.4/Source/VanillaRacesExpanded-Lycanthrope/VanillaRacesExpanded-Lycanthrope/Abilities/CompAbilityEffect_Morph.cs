@@ -3,6 +3,8 @@ using RimWorld;
 using Verse;
 using Verse.Sound;
 using System;
+using VanillaRacesExpandedHighmate;
+using VanillaRacesExpandedPhytokin;
 
 namespace VanillaRacesExpandedLycanthrope
 {
@@ -46,6 +48,12 @@ namespace VanillaRacesExpandedLycanthrope
         public float lovinValueForm1 = 1;
         public float lovinValueForm2 = 1;
 
+        public float psyfocusValueForm1 = 1;
+        public float psyfocusValueForm2 = 1;
+
+        public float wastepacksValueForm1 = 1;
+        public float wastepacksValueForm2 = 1;
+
         public override void PostExposeData()
         {
             base.PostExposeData();
@@ -67,6 +75,10 @@ namespace VanillaRacesExpandedLycanthrope
             Scribe_Values.Look(ref this.killThirstValueForm2, nameof(this.killThirstValueForm2));
             Scribe_Values.Look(ref this.lovinValueForm1, nameof(this.lovinValueForm1));
             Scribe_Values.Look(ref this.lovinValueForm2, nameof(this.lovinValueForm2));
+            Scribe_Values.Look(ref this.psyfocusValueForm1, nameof(this.psyfocusValueForm1));
+            Scribe_Values.Look(ref this.psyfocusValueForm2, nameof(this.psyfocusValueForm2));
+            Scribe_Values.Look(ref this.wastepacksValueForm1, nameof(this.wastepacksValueForm1));
+            Scribe_Values.Look(ref this.wastepacksValueForm2, nameof(this.wastepacksValueForm2));
         }
 
         public override bool ShouldHideGizmo
@@ -88,18 +100,14 @@ namespace VanillaRacesExpandedLycanthrope
         public void StoreNeedValues(int form, Pawn pawn, bool storeOrRestore)
         {
             Gene_Hemogen gene_Hemogen = pawn.genes?.GetFirstGeneOfType<Gene_Hemogen>();
-
-            if (form == 1)
+            if (gene_Hemogen != null)
             {
-                if (gene_Hemogen != null)
+                if (form == 1)
                 {
                     if (storeOrRestore) { hemogenValueForm1 = gene_Hemogen.Value; }
                     else { gene_Hemogen.Value = hemogenValueForm2; }
                 }
-            }
-            else if (form == 2)
-            {
-                if (gene_Hemogen != null)
+                else if (form == 2)
                 {
                     if (storeOrRestore) { hemogenValueForm2 = gene_Hemogen.Value; }
                     else { gene_Hemogen.Value = hemogenValueForm1; }
@@ -107,18 +115,14 @@ namespace VanillaRacesExpandedLycanthrope
             }
 
             Gene_Deathrest gene_Deathrest = pawn.genes?.GetFirstGeneOfType<Gene_Deathrest>();
-
-            if (form == 1)
+            if (gene_Deathrest != null)
             {
-                if (gene_Deathrest != null)
+                if (form == 1)
                 {
                     if (storeOrRestore) { DeathrestValueForm1 = gene_Deathrest.DeathrestNeed.CurLevel; }
                     else { gene_Deathrest.DeathrestNeed.CurLevel = DeathrestValueForm2; }
                 }
-            }
-            else if (form == 2)
-            {
-                if (gene_Deathrest != null)
+                else if (form == 2)
                 {
                     if (storeOrRestore) { DeathrestValueForm2 = gene_Deathrest.DeathrestNeed.CurLevel; }
                     else { gene_Deathrest.DeathrestNeed.CurLevel = DeathrestValueForm1; }
@@ -126,21 +130,32 @@ namespace VanillaRacesExpandedLycanthrope
             }
 
             Need_KillThirst killthirst = pawn.needs?.TryGetNeed<Need_KillThirst>();
-
-            if (form == 1)
+            if (killthirst != null)
             {
-                if (killthirst != null)
+                if (form == 1)
                 {
                     if (storeOrRestore) { killThirstValueForm1 = killthirst.CurLevel; }
                     else { killthirst.CurLevel = killThirstValueForm2; }
                 }
-            }
-            else if (form == 2)
-            {
-                if (killthirst != null)
+                else if (form == 2)
                 {
                     if (storeOrRestore) { killThirstValueForm2 = killthirst.CurLevel; }
                     else { killthirst.CurLevel = killThirstValueForm1; }
+                }
+            }
+
+            Pawn_PsychicEntropyTracker psy = pawn.psychicEntropy;
+            if (psy != null)
+            {
+                if (form == 1)
+                {
+                    if (storeOrRestore) { psyfocusValueForm1 = psy.CurrentPsyfocus; }
+                    else{ReflectionCache.psyfocus(psy) = psyfocusValueForm2;}
+                }
+                else if (form == 2)
+                {
+                    if (storeOrRestore) { psyfocusValueForm2 = psy.CurrentPsyfocus; }
+                    else { ReflectionCache.psyfocus(psy) = psyfocusValueForm1; }
                 }
             }
 
@@ -168,7 +183,33 @@ namespace VanillaRacesExpandedLycanthrope
             }
             catch (TypeLoadException) { }
 
-            
+            try
+            {
+                ((Action)(() =>
+                {
+                    if (ModLister.HasActiveModWithName("Vanilla Races Expanded - Phytokin"))
+                    {
+
+                        Gene_Resource_Wastepacks gene_Wastepacks = pawn.genes?.GetFirstGeneOfType<Gene_Resource_Wastepacks>();
+                        if (gene_Wastepacks != null)
+                        {
+                            if (form == 1)
+                            {
+                                if (storeOrRestore) { wastepacksValueForm1 = gene_Wastepacks.Resource.Value; }
+                                else { gene_Wastepacks.Resource.Value = wastepacksValueForm2; }
+                            }
+                            else if (form == 2)
+                            {
+                                if (storeOrRestore) { wastepacksValueForm2 = gene_Wastepacks.Resource.Value; }
+                                else { gene_Wastepacks.Resource.Value = wastepacksValueForm1; }
+                            }
+                        }
+                    }
+                }))();
+            }
+            catch (TypeLoadException) { }
+
+
         }
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
