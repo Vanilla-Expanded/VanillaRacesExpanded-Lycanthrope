@@ -27,11 +27,8 @@ namespace VanillaRacesExpandedLycanthrope
 
         public List<GeneDef> xenogenes = new List<GeneDef>();
 
-        public string xenotypeName;
-
-        public XenotypeIconDef xenotypeicon;
-
         public XenotypeDef xenotype;
+        public XenotypeDef xenotypeOriginal;
 
         public int randomMorphTime = Rand.RangeInclusive(36, 2400);
         public int randomMorphCounter = 0;
@@ -62,11 +59,10 @@ namespace VanillaRacesExpandedLycanthrope
             Scribe_Values.Look(ref morphed, nameof(morphed));
             Scribe_Collections.Look(ref this.endogenes, nameof(this.endogenes), LookMode.Def);
             Scribe_Collections.Look(ref this.xenogenes, nameof(this.xenogenes), LookMode.Def);
-            Scribe_Values.Look(ref this.xenotypeName, nameof(this.xenotypeName));
             Scribe_Values.Look(ref this.randomMorphTime, nameof(this.randomMorphTime));
-            Scribe_Values.Look(ref this.randomMorphCounter, nameof(this.randomMorphCounter));
-            Scribe_Defs.Look(ref this.xenotypeicon, nameof(this.xenotypeicon));
+            Scribe_Values.Look(ref this.randomMorphCounter, nameof(this.randomMorphCounter));     
             Scribe_Defs.Look(ref this.xenotype, nameof(this.xenotype));
+            Scribe_Defs.Look(ref this.xenotypeOriginal, nameof(this.xenotypeOriginal));
             Scribe_Values.Look(ref this.hemogenValueForm1, nameof(this.hemogenValueForm1));
             Scribe_Values.Look(ref this.hemogenValueForm2, nameof(this.hemogenValueForm2));
             Scribe_Values.Look(ref this.DeathrestValueForm1, nameof(this.DeathrestValueForm1));
@@ -290,9 +286,11 @@ namespace VanillaRacesExpandedLycanthrope
                 this.xenogenes.Clear();
                 foreach (GeneDef genedef in endogenes) { this.endogenes.Add(genedef); }
                 foreach (GeneDef genedef in xenogenes) { this.xenogenes.Add(genedef); }
-                this.xenotypeName = pawn.genes.xenotypeName;
-                this.xenotypeicon = pawn.genes.iconDef;
 
+                if (this.xenotypeOriginal==null) {
+                  
+                    this.xenotypeOriginal = pawn.genes.Xenotype;
+                }
 
 
                 if (pawn.genes?.GenesListForReading.Count > 0)
@@ -321,8 +319,7 @@ namespace VanillaRacesExpandedLycanthrope
                 foreach (GeneDef genedef in this.endogenes) { modifiedEndogenes.Add(genedef); }
                 foreach (GeneDef genedef in this.xenogenes) { modifiedXenogenes.Add(genedef); }
 
-                string modifiedXenotype = this.xenotypeName;
-                XenotypeIconDef modifiedIcon = this.xenotypeicon;
+               
 
                 this.endogenes.Clear();
                 this.xenogenes.Clear();
@@ -355,30 +352,21 @@ namespace VanillaRacesExpandedLycanthrope
                 if (modifiedEndogenes.Count > 0)
                 {
                     foreach (GeneDef genedef in modifiedEndogenes) { pawn.genes.AddGene(genedef, false); }
-
                 }
                 if (modifiedXenogenes.Count > 0)
                 {
                     foreach (GeneDef genedef in modifiedXenogenes) { pawn.genes.AddGene(genedef, true); }
-
                 }
-                this.xenotypeName = pawn.genes.xenotypeName;
-                this.xenotypeicon = pawn.genes.iconDef;
 
-
-
-                pawn.genes.xenotypeName = modifiedXenotype;
-                pawn.genes.iconDef = modifiedIcon;
-
+                SetXenotypeNoClearing(pawn, xenotypeOriginal);
                 StoreNeedValues(2, pawn, false);
             }
         }
 
-
         public void SetXenotypeNoClearing(Pawn pawn, XenotypeDef xenotype)
         {
             pawn.genes.SetXenotypeDirect(xenotype);
-            pawn.genes.iconDef = null;
+            //pawn.genes.iconDef = null;
             for (int i = 0; i < xenotype.genes.Count; i++)
             {
                 if (!Utils.ContainsOfDef(morphedGenesToMaintain, xenotype.genes[i])) { pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable); }
