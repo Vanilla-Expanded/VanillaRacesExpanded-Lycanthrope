@@ -60,7 +60,7 @@ namespace VanillaRacesExpandedLycanthrope
             Scribe_Collections.Look(ref this.endogenes, nameof(this.endogenes), LookMode.Def);
             Scribe_Collections.Look(ref this.xenogenes, nameof(this.xenogenes), LookMode.Def);
             Scribe_Values.Look(ref this.randomMorphTime, nameof(this.randomMorphTime));
-            Scribe_Values.Look(ref this.randomMorphCounter, nameof(this.randomMorphCounter));     
+            Scribe_Values.Look(ref this.randomMorphCounter, nameof(this.randomMorphCounter));
             Scribe_Defs.Look(ref this.xenotype, nameof(this.xenotype));
             Scribe_Defs.Look(ref this.xenotypeOriginal, nameof(this.xenotypeOriginal));
             Scribe_Values.Look(ref this.hemogenValueForm1, nameof(this.hemogenValueForm1));
@@ -146,7 +146,7 @@ namespace VanillaRacesExpandedLycanthrope
                 if (form == 1)
                 {
                     if (storeOrRestore) { psyfocusValueForm1 = psy.CurrentPsyfocus; }
-                    else{ReflectionCache.psyfocus(psy) = psyfocusValueForm2;}
+                    else { ReflectionCache.psyfocus(psy) = psyfocusValueForm2; }
                 }
                 else if (form == 2)
                 {
@@ -261,6 +261,7 @@ namespace VanillaRacesExpandedLycanthrope
             }
 
 
+
             // Morph from 1 to 2
 
             if (!morphed)
@@ -287,8 +288,9 @@ namespace VanillaRacesExpandedLycanthrope
                 foreach (GeneDef genedef in endogenes) { this.endogenes.Add(genedef); }
                 foreach (GeneDef genedef in xenogenes) { this.xenogenes.Add(genedef); }
 
-                if (this.xenotypeOriginal==null) {
-                  
+                if (this.xenotypeOriginal == null)
+                {
+
                     this.xenotypeOriginal = pawn.genes.Xenotype;
                 }
 
@@ -319,7 +321,7 @@ namespace VanillaRacesExpandedLycanthrope
                 foreach (GeneDef genedef in this.endogenes) { modifiedEndogenes.Add(genedef); }
                 foreach (GeneDef genedef in this.xenogenes) { modifiedXenogenes.Add(genedef); }
 
-               
+
 
                 this.endogenes.Clear();
                 this.xenogenes.Clear();
@@ -366,11 +368,34 @@ namespace VanillaRacesExpandedLycanthrope
         public void SetXenotypeNoClearing(Pawn pawn, XenotypeDef xenotype)
         {
             pawn.genes.SetXenotypeDirect(xenotype);
-            //pawn.genes.iconDef = null;
+
             for (int i = 0; i < xenotype.genes.Count; i++)
             {
                 if (!Utils.ContainsOfDef(morphedGenesToMaintain, xenotype.genes[i])) { pawn.genes.AddGene(xenotype.genes[i], !xenotype.inheritable); }
             }
+            List<Gene> genes = pawn.genes?.GenesListForReading;
+            if (genes.Count > 0)
+            {
+                foreach (Gene gene in genes)
+                {
+                    if (gene?.def.defName.Contains("VRE_Morphs") == true)
+                    {
+                        if (xenotype?.AllGenes?.Contains(gene.def) == true)
+                        {
+                            Gene otherGene = gene.overriddenByGene;
+
+                            gene.overriddenByGene = null;
+                            if (otherGene != null)
+                            {
+                                otherGene.overriddenByGene = gene;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+
         }
 
         public override void CompTick()
