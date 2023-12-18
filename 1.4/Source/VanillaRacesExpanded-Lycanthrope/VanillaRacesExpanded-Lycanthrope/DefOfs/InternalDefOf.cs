@@ -36,6 +36,7 @@ namespace VanillaRacesExpandedLycanthrope
         public static EffecterDef CocoonDestroyed;
 
         public static SoundDef VRE_WarHowl_Cast;
+        public static SoundDef VRE_MorphSound;
 
         public static FactionDef VRE_WolfmenFaction;
 

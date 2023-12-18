@@ -226,7 +226,7 @@ namespace VanillaRacesExpandedLycanthrope
                     FilthMaker.TryMakeFilth(c, pawn.Map, ThingDefOf.Filth_Blood);
                 }
 
-                SoundDefOf.Hive_Spawn.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map, false));
+                InternalDefOf.VRE_MorphSound.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map, false));
             }
 
             List<Gene> genes = pawn.genes?.GenesListForReading;
