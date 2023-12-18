@@ -44,6 +44,7 @@
 			<li>WoundHealing_SuperFast</li>
 			<li>Aggression_Aggressive</li>
 			<li>MeleeDamage_Strong</li>
+			<li>RobustDigestion</li>
 		</genes>
 	</XenotypeDef>
 </Defs>
