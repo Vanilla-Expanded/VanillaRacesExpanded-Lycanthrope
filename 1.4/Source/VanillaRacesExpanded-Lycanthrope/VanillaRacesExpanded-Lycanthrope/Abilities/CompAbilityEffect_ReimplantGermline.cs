@@ -48,10 +48,24 @@ namespace VanillaRacesExpandedLycanthrope
                     recipient.genes.RemoveGene(recipient.genes.Endogenes[num]);
                 }
             }
+            List<Gene> adjustedList = new List<Gene>();
 
             foreach (Gene endogene in caster.genes.Endogenes)
             {
+                if (endogene.def.defName.Contains("VRE_Morphs"))
+                {
+                    if (endogene.Active)
+                    {
+                        adjustedList.Add(endogene);
+                    }
+                }else adjustedList.Add(endogene);
+            }
+
+
+            foreach (Gene endogene in adjustedList)
+            {
                 recipient.genes.AddGene(endogene.def, xenogene: false);
+                
             }
             if (!caster.genes.Xenotype.soundDefOnImplant.NullOrUndefined())
             {
