@@ -164,10 +164,10 @@ namespace VanillaRacesExpandedLycanthrope
                     {
                         List<FloatMenuOption> list = new List<FloatMenuOption>();
                         List<Pawn> list2 = myPawn.MapHeld.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
-                        Pawn absorber = default(Pawn);
+                       
                         for (int i = 0; i < list2.Count; i++)
                         {
-                            absorber = list2[i];
+                            Pawn absorber = list2[i];
                             if (absorber.genes != null && absorber.IsColonistPlayerControlled && !GeneUtility.SameXenotype(absorber, myPawn) && absorber.CanReach(myPawn, PathEndMode.ClosestTouch, Danger.Deadly))
                             {
                                 if (!PawnIdeoCanAcceptReimplant(parent.pawn, absorber))
@@ -182,11 +182,14 @@ namespace VanillaRacesExpandedLycanthrope
                                         {
                                             Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("VRE_WarningPawnWillDieFromReimplanting".Translate(myPawn.Named("PAWN")), delegate
                                             {
+                                                
+                                                Log.Message("Calling GiveReimplantJob with " + absorber);
                                                 GiveReimplantJob(absorber, myPawn);
                                             }, destructive: true));
                                         }
                                         else
                                         {
+                                            Log.Message("Calling GiveReimplantJob with " + absorber);
                                             GiveReimplantJob(absorber, myPawn);
                                         }
                                     }, absorber, Color.white));
@@ -217,6 +220,7 @@ namespace VanillaRacesExpandedLycanthrope
 
         public static void GiveReimplantJob(Pawn pawn, Pawn targPawn)
         {
+            Log.Message("Assigning job to extract from " + targPawn + " to " + pawn);
             pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(InternalDefOf.VRE_AbsorbGermline, targPawn), JobTag.Misc);
             if (targPawn.HomeFaction != null && !targPawn.HomeFaction.Hidden && targPawn.HomeFaction != pawn.Faction && !targPawn.HomeFaction.HostileTo(Faction.OfPlayer))
             {
