@@ -218,7 +218,8 @@ namespace VanillaRacesExpandedLycanthrope
             {
                 Effecter effecter = InternalDefOf.CocoonDestroyed.SpawnAttached(pawn, pawn.Map);
                 effecter.Trigger(pawn, null);
-                for (int i = 0; i < 5; i++)
+                IntRange numberOfFilth = new IntRange(1,2);
+                for (int i = 0; i < numberOfFilth.RandomInRange; i++)
                 {
                     IntVec3 c;
                     CellFinder.TryFindRandomReachableCellNear(pawn.Position, pawn.Map, 2, TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Deadly, false), null, null, out c);
