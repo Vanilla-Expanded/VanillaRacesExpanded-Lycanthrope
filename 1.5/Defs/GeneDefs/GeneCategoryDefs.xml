@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneCategoryDef>
+		<defName>VRE_Morphs</defName>
+		<label>morphs</label>
+		<displayPriorityInXenotype>999.671</displayPriorityInXenotype>
+	</GeneCategoryDef>
+  <GeneCategoryDef>
+    <defName>VRE_MeleeDodge</defName>
+    <label>melee dodge</label>
+    <displayPriorityInXenotype>200.001</displayPriorityInXenotype>
+  </GeneCategoryDef>
+</Defs>

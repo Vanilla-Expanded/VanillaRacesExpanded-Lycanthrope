@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef Name="VRE_BodyBaseLycans" Abstract="True">
+		<displayCategory>Cosmetic</displayCategory>
+		<exclusionTags>
+			<li>AG_Bodies</li>
+			<li>Bodies</li>
+			<li>Body</li>
+			<li>Fur</li>
+		</exclusionTags>
+		<iconColor>(0.75, 0.75, 0.75)</iconColor>
+		
+	</GeneDef>
+	<GeneDef ParentName="VRE_BodyBaseLycans">
+		<defName>VRE_ChestFur</defName>
+		<label>chest fur</label>
+		<description>Carriers of this gene grow thick fur on their chest.</description>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>0</biostatMet>
+		<fur>VRE_ChestFur</fur>
+		<skinIsHairColor>false</skinIsHairColor>
+		<tattoosVisible>true</tattoosVisible>
+		<renderNodeProperties>
+			<li>
+				<debugLabel>Fur</debugLabel>
+				<nodeClass>PawnRenderNode_Fur</nodeClass>
+				<workerClass>PawnRenderNodeWorker_Fur</workerClass>
+				<baseLayer>5</baseLayer>
+				<rotDrawMode>Fresh, Rotting</rotDrawMode>
+				<colorType>Hair</colorType>
+				<parentTagDef>Body</parentTagDef>
+			</li>
+		</renderNodeProperties>
+		<iconPath>UI/Icons/Genes/Gene_Chestfur</iconPath>
+		<statOffsets>
+			<ComfyTemperatureMin>-5</ComfyTemperatureMin>
+		</statOffsets>
+		<modExtensions>
+			<li Class="VanillaGenesExpanded.GeneExtension">
+				<useSkinAndHairColorsForFur>true</useSkinAndHairColorsForFur>
+			</li>
+		</modExtensions>
+	</GeneDef>
+</Defs>

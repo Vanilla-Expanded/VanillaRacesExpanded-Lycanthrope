@@ -2,9 +2,10 @@
 	<name>Vanilla Races Expanded - Lycanthrope</name>
 	<author>Oskar Potocki, Sarg Bjornson</author>
 	<supportedVersions>
-
 		<li>1.4</li>
+		<li>1.5</li>
 	</supportedVersions>
+	<modIconPath IgnoreIfNoMatchingField="True">UI/VELogo</modIconPath>
 	<modDependencies>
 		<li>
 			<packageId>brrainz.harmony</packageId>
@@ -21,7 +22,6 @@
 		<li>
 			<packageId>Ludeon.RimWorld.Biotech</packageId>
 			<displayName>Biotech</displayName>
-			
 		</li>
 	</modDependencies>
 	<loadAfter>
@@ -31,9 +31,11 @@
 		<li>Ludeon.RimWorld.Biotech</li>
 		<li>brrainz.harmony</li>
 		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
-
 	</loadAfter>
-
 	<packageId>vanillaracesexpanded.lycanthrope</packageId>
-	<description>.</description>
+	<description>Vanilla Races Expanded is a brand new series of mods to enhance Biotech features, add to the storytelling and the world-building of RimWorld, and to introduce new, cool types of xenohumans, complete with their own unique genes, behaviors, mechanics and items.
+
+Vanilla Races Expanded - Lycanthrope aims to bring a unique new archite-powered being into existence. Lycanthropes are seemingly simple baseliners with a unique ability to morph into a powerful lycan form. These lycans look similar to werewolves and excel in unarmed combat. Their rage and rapid regeneration allows them to sustain severe damage, while their claws and bites will shred even armored enemies to pieces.
+
+The functionality of the morph gene is extended further, allowing the Morph gene to appear in any genepacks, and morph into any of the existing xenotypes.</description>
 </ModMetaData>

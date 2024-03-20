@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+
+  <ThoughtDef>
+    <defName>VRE_LightSensitivity</defName>
+    <workerClass>VanillaRacesExpandedLycanthrope.ThoughtWorker_LightSensitivity</workerClass>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <requiredGenes>
+      <li>VRE_LightSensitivity</li>
+    </requiredGenes>
+    <stages>
+      <li>
+        <label>light sensitivity</label>
+        <description>Light is unpleasant and hurts my eyes.</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+   <ThoughtDef>
+    <defName>VRE_IntenseLightSensitivity</defName>
+    <workerClass>VanillaRacesExpandedLycanthrope.ThoughtWorker_LightSensitivity</workerClass>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <requiredGenes>
+      <li>VRE_IntenseLightSensitivity</li>
+    </requiredGenes>
+    <stages>
+      <li>
+        <label>light sensitivity</label>
+        <description>There is too much light here, it hurts!</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+    <ThoughtDef>
+    <defName>VRE_Photophobia</defName>
+    <workerClass>VanillaRacesExpandedLycanthrope.ThoughtWorker_Photophobia</workerClass>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>afraid of light</label>
+        <description>The light makes me so nervous. It's like it burns me with its intensity!</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

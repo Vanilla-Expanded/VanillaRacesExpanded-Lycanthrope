@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Races Expanded - Hussar</li>
+		</mods>
+		<match Class="PatchOperationConditional">
+			<success>Always</success>
+			<xpath>/Defs/GeneDef[defName = "VREH_Arrogant"]/exclusionTags</xpath>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/GeneDef[defName = "VREH_Arrogant"]</xpath>
+				<value>
+					<exclusionTags>
+						<li>VRE_ArrogantAndSpeechInability</li>
+					</exclusionTags>
+				</value>
+			</nomatch>
+			<match Class="PatchOperationAdd">
+				<xpath>/Defs/GeneDef[defName = "VREH_Arrogant"]/exclusionTags</xpath>
+				<value>
+					<li>VRE_ArrogantAndSpeechInability</li>
+				</value>
+			</match>
+		</match>
+	</Operation>
+</Patch>
+
