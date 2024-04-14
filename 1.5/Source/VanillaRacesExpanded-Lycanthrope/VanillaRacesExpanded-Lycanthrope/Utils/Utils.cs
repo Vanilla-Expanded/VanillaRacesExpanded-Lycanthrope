@@ -37,9 +37,9 @@ namespace VanillaRacesExpandedLycanthrope
         }
         public static bool ContainsAnyRelationOfDef(Pawn pawn, PawnRelationDef relation)
         {
-            foreach (DirectPawnRelation directPawnRelation in pawn.relations.DirectRelations)
+            foreach (DirectPawnRelation directPawnRelation in pawn.relations?.DirectRelations)
             {
-                if (directPawnRelation.def == relation)
+                if (directPawnRelation?.def == relation)
                 {
                     return true;
                 }
