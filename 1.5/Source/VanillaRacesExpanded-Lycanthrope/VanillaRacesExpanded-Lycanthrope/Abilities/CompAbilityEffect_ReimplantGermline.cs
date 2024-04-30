@@ -37,6 +37,13 @@ namespace VanillaRacesExpandedLycanthrope
         {
 
             QuestUtility.SendQuestTargetSignals(caster.questTags, "XenogermReimplanted", caster.Named("SUBJECT"));
+
+            List<GeneDef> xenogenesToPreserve = new List<GeneDef>(); 
+            foreach(Gene gene in recipient.genes.Xenogenes)
+            {
+                xenogenesToPreserve.Add(gene.def);
+            }
+            
             recipient.genes.SetXenotype(caster.genes.Xenotype);
             recipient.genes.xenotypeName = caster.genes.xenotypeName;
             recipient.genes.xenotypeName = caster.genes.xenotypeName;
@@ -66,6 +73,14 @@ namespace VanillaRacesExpandedLycanthrope
             {
                 recipient.genes.AddGene(endogene.def, xenogene: false);
                 
+            }
+
+            foreach (GeneDef xenogene in xenogenesToPreserve)
+            {
+              
+
+                recipient.genes.AddGene(xenogene, xenogene: true);
+
             }
             if (!caster.genes.Xenotype.soundDefOnImplant.NullOrUndefined())
             {
