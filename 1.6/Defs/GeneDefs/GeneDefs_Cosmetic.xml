@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef ParentName="GeneEarsBase">
+		<defName>VRE_CanineEars</defName>
+		<label>canine ears</label>
+		<description>Carriers of this gene will grow wolf-like ears.</description>
+		<iconPath>UI/Icons/Genes/Gene_EarCanine</iconPath>
+		<renderNodeProperties Inherit="False">
+			<li>
+				<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Things/Pawn/Humanlike/HeadAttachments/CanineEars/CanineEars</texPath>
+				<useSkinShader>true</useSkinShader>
+				<colorType>Skin</colorType>
+				<drawData>
+					<defaultData>
+						<layer>70</layer>
+					</defaultData>
+				</drawData>
+				<parentTagDef>Head</parentTagDef>
+			</li>
+		</renderNodeProperties>
+		<biostatCpx>1</biostatCpx>
+	</GeneDef>
+	<GeneDef ParentName="GeneNoseBase">
+		<defName>VRE_CanineNose</defName>
+		<label>canine nose</label>
+		<description>Carriers of this gene have wolf-like noses.</description>
+		<iconPath>UI/Icons/Genes/Gene_NoseCanine</iconPath>
+		<renderNodeProperties>
+			<li>
+				<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+				<workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+				<texPath>Things/Pawn/Humanlike/HeadAttachments/CanineNose/CanineNose</texPath>
+				<narrowCrownHorizontalOffset>0.03</narrowCrownHorizontalOffset>
+				<useSkinShader>true</useSkinShader>
+				<useRottenColor>true</useRottenColor>
+				<colorType>Skin</colorType>
+				<parentTagDef>Head</parentTagDef>
+				<rotDrawMode>Fresh, Rotting</rotDrawMode>
+				<visibleFacing>
+					<li>East</li>
+					<li>South</li>
+					<li>West</li>
+				</visibleFacing>
+				<drawData>
+					<defaultData>
+						<layer>66</layer>
+					</defaultData>
+				</drawData>
+			</li>
+		</renderNodeProperties>
+		<biostatCpx>1</biostatCpx>
+		<missingGeneRomanceChanceFactor>0.2</missingGeneRomanceChanceFactor>
+		<displayCategory>Miscellaneous</displayCategory>
+		<displayOrderInCategory>410.1</displayOrderInCategory>
+	</GeneDef>
+	<GeneDef ParentName="GeneTailBase">
+		<defName>VRE_CanineTail</defName>
+		<label>wolf tail</label>
+		<description>Carriers of this gene grow a wolf-like tail that helps them with movement slightly.</description>
+		<iconPath>UI/Icons/Genes/Gene_TailWolf</iconPath>
+		<iconColor>(0.75, 0.75, 0.75)</iconColor>
+		<displayOrderInCategory>1000.1</displayOrderInCategory>
+		<statOffsets>
+			<MoveSpeed>0.05</MoveSpeed>
+		</statOffsets>
+		<biostatCpx>1</biostatCpx>
+		<renderNodeProperties>
+			<li>
+				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+				<texPath>Things/Pawn/Humanlike/BodyAttachments/WolfTail/WolfTail</texPath>
+				<colorType>Hair</colorType>
+				<overrideMeshSize>(1, 1)</overrideMeshSize>
+				<parentTagDef>Body</parentTagDef>
+				<rotDrawMode>Fresh, Rotting</rotDrawMode>
+				<drawData>
+					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+					<defaultData>
+						<layer>-2</layer>
+					</defaultData>
+					<dataNorth>
+						<offset>(0, 0.2, -0.25)</offset>
+						<layer>90</layer>
+					</dataNorth>
+					<dataSouth>
+						<offset>(0, -0.1, -0.25)</offset>
+					</dataSouth>
+					<dataEast>
+						<offset>(-0.5, -0.1, -0.15)</offset>
+					</dataEast>
+					<dataWest>
+						<offset>(0.5, -0.1, -0.15)</offset>
+					</dataWest>
+				</drawData>
+			</li>
+		</renderNodeProperties>
+	</GeneDef>
+	<GeneDef ParentName="GeneBeardStyleBase">
+		<defName>VRE_OnlySideburns</defName>
+		<label>only sideburns</label>
+		<description>Male carriers of this gene experience rapid beard growth on the sides of their face.</description>
+		<iconPath>UI/Icons/Genes/Gene_BeardStyleSideburnsOnly</iconPath>
+		<displayOrderInCategory>60.1</displayOrderInCategory>
+		<beardTagFilter>
+			<whitelist>true</whitelist>
+			<tags>
+				<li>VRE_WolfmanBeards</li>
+			</tags>
+		</beardTagFilter>
+	</GeneDef>
+</Defs>

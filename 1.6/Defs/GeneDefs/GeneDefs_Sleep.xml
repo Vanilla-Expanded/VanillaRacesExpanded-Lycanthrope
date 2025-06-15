@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<GeneDef>
+		<defName>VRE_Nocturnal</defName>
+		<label>nocturnal</label>
+		
+		<description>Carriers of this gene prefer to work at night. They are happier if awake at nights and unhappy if awake during the day.</description>
+		<iconPath>UI/Icons/Genes/Gene_Nocturnal</iconPath>
+		<displayOrderInCategory>101</displayOrderInCategory>
+		<forcedTraits>
+			<li>
+				<def>NightOwl</def>
+			</li>
+		</forcedTraits>
+		<displayCategory>Sleep</displayCategory>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>0</biostatMet>
+	
+	</GeneDef>
+	
+
+</Defs>
