@@ -14,6 +14,7 @@
 		<showPsycastEffects>False</showPsycastEffects>
 		<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
 		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
 		<hotKey>Misc12</hotKey>
 		<verbProperties>
 			<verbClass>Verb_CastAbility</verbClass>
