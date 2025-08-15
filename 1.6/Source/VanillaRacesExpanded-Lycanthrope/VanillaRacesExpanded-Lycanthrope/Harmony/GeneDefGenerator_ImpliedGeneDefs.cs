@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using VEF.Genes;
 using UnityEngine;
 using Verse;
 using RimWorld;
-
 using HarmonyLib;
 
 
@@ -75,6 +74,7 @@ namespace VanillaRacesExpandedLycanthrope
                     new MorphGeneDefExtension {
                         xenotype = def
                     }
+                   
                 },
 
                 abilities = new List<AbilityDef> { template.ability },

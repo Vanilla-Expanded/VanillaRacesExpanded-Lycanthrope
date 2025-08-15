@@ -35,6 +35,11 @@
 				
 			</li>
 		</comps>
+		<modExtensions>
+			<li Class="VEF.Genes.AbilityGeneExtension">
+				<dontModifyAbilityOnGeneRemoval>true</dontModifyAbilityOnGeneRemoval>
+			</li>
+		</modExtensions>
 	</AbilityDef>
 	<AbilityDef>
 		<defName>VRE_WarHowl</defName>

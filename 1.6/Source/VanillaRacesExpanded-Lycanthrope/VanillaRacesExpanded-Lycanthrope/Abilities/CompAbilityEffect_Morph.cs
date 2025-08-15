@@ -267,6 +267,7 @@ namespace VanillaRacesExpandedLycanthrope
 
             if (!morphed)
             {
+                //Log.Message("Morph from 1 to 2");
                 morphed = true;
 
                 StoreNeedValues(1, pawn, true);
@@ -312,6 +313,7 @@ namespace VanillaRacesExpandedLycanthrope
 
             else
             {
+                //Log.Message("Morph from 2 to 1");
                 morphed = false;
 
                 StoreNeedValues(2, pawn, true);
@@ -401,14 +403,15 @@ namespace VanillaRacesExpandedLycanthrope
 
         public override void CompTick()
         {
-            base.CompTick();
-
+           
             if (this.parent.pawn.IsHashIntervalTick(1000))
             {
+              
                 if (this.parent.pawn.HasActiveGene(InternalDefOf.VRE_Morphs_NocturnalMorphing))
                 {
 
                     float currentTime = GenLocalDate.DayTick(this.parent.pawn);
+                  
                     if (currentTime > 45000 || currentTime < 15000)
                     {
                         if (!MorphConditionSwitch)
