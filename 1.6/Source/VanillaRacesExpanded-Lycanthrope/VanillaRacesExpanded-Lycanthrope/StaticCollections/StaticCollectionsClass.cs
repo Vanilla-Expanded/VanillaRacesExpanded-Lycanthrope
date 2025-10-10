@@ -4,6 +4,7 @@ using System;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using VEF.CacheClearing;
 
 
 namespace VanillaRacesExpandedLycanthrope
@@ -14,8 +15,12 @@ namespace VanillaRacesExpandedLycanthrope
 
         // A list of maps and nunber of pack members on it
         public static Dictionary<Map, int> map_PackMembers = new Dictionary<Map, int>();
-  
 
+        static StaticCollectionsClass()
+        {
+            ClearCaches.clearCacheTypes.Add(typeof(StaticCollectionsClass));
+
+        }
         public static void AddMapPackMembers(Map map, int number)
         {
             if (map != null)

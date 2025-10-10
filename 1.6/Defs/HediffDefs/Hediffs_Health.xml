@@ -9,6 +9,7 @@
 		<description>This person moves extremely quick. They will ignore terrain movement costs when moving.</description>
 		<hediffClass>HediffWithComps</hediffClass>
 		<scenarioCanAdd>false</scenarioCanAdd>
+		<allowMothballIfLowPriorityWorldPawn>true</allowMothballIfLowPriorityWorldPawn>
 		<maxSeverity>1.0</maxSeverity>
 		<isBad>false</isBad>
 		<comps>
@@ -24,6 +25,7 @@
 		<label>warhowl</label>
 		<description>Increase to combat capabilities caused by the warhowl ability. Stacks up to 10 times and lasts 3 hours.</description>
 		<hediffClass>HediffWithComps</hediffClass>
+		<allowMothballIfLowPriorityWorldPawn>true</allowMothballIfLowPriorityWorldPawn>
 		<scenarioCanAdd>false</scenarioCanAdd>
 		<comps>		
 			<li Class="HediffCompProperties_Disappears">
@@ -129,6 +131,7 @@
     <label>endogermination coma</label>
     <description>A germline was implanted in this person. The germline needs time to integrate itself into the host and modify the genes and chemistry of various tissues throughout the body. During this time, the person cannot safely wake up, so the germline keeps them in a coma.\n\nThe duration of this coma can be reduced by implanting a germline with better medical facilities and more skilled doctors.</description>
     <hediffClass>HediffWithComps</hediffClass>
+	<allowMothballIfLowPriorityWorldPawn>true</allowMothballIfLowPriorityWorldPawn>
     <initialSeverity>0.001</initialSeverity>
     <defaultLabelColor>(0.9, 1.0, 0.35)</defaultLabelColor>
     <stages>
@@ -156,6 +159,7 @@
     <label>endogene loss shock</label>
     <description>This person's endogenes were recently removed or expelled. This has destabilized the person's metabolism and hormones, leaving them temporarily weak and drowsy, with a weakened immune system.</description>
     <hediffClass>HediffWithComps</hediffClass>
+	<allowMothballIfLowPriorityWorldPawn>true</allowMothballIfLowPriorityWorldPawn>
     <initialSeverity>0.001</initialSeverity>
     <defaultLabelColor>(0.9, 1.0, 0.35)</defaultLabelColor>
     <stages>
