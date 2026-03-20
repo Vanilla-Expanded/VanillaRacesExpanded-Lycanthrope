@@ -4,6 +4,7 @@ using RimWorld;
 using RimWorld.QuestGen;
 using UnityEngine;
 using Verse;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 namespace VanillaRacesExpandedLycanthrope
 {
@@ -60,46 +61,42 @@ namespace VanillaRacesExpandedLycanthrope
             faction.temporary = true;
             Find.FactionManager.Add(faction);
             quest.ReserveFaction(faction);
-            List<Pawn> shuttlePawns = new List<Pawn>();
+            List<Pawn> sanguophages = new List<Pawn>();
             Pawn pawn = quest.GeneratePawn(new PawnGenerationRequest(InternalDefOf.VRE_WolfmenPawnKindDef, faction, PawnGenerationContext.NonPlayer, -1, forceGenerateNewPawn: true, allowDead: false, allowDowned: false, canGeneratePawnRelations: true, mustBeCapableOfViolence: true, 1f, forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowPregnant: true));
             pawn.health.forceDowned = true;
-            shuttlePawns.Add(pawn);
+            sanguophages.Add(pawn);
             slate.Set("lycan", pawn);
             int num = Mathf.RoundToInt(PointsToThrallCountCurve.Evaluate(x));
             PawnGenerationRequest request = new PawnGenerationRequest(InternalDefOf.VRE_WolfmenPawnKindDef, faction, PawnGenerationContext.NonPlayer, -1, forceGenerateNewPawn: true, allowDead: false, allowDowned: false, canGeneratePawnRelations: true, mustBeCapableOfViolence: true, 1f, forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowPregnant: true);
             for (int i = 0; i < num; i++)
             {
                 Pawn item = quest.GeneratePawn(request);
-                shuttlePawns.Add(item);
+                sanguophages.Add(item);
             }
             slate.Set("WolfmenCount", num);
-            slate.Set("shuttlePawns", shuttlePawns);
+            slate.Set("sanguophages", sanguophages);
             Thing thing = ThingMaker.MakeThing(ThingDefOf.ShuttleCrashed_Exitable);
             quest.SetFaction(Gen.YieldSingle(thing), faction);
             TryFindShuttleCrashPosition(map, thing.def.size, out var shuttleCrashPosition);
-            TransportShip transportShip = quest.GenerateTransportShip(TransportShipDefOf.Ship_ShuttleCrashing, shuttlePawns, thing).transportShip;
+            TransportShip transportShip = quest.GenerateTransportShip(TransportShipDefOf.Ship_ShuttleCrashing, sanguophages, thing).transportShip;
             quest.AddShipJob_WaitTime(transportShip, 60, leaveImmediatelyWhenSatisfied: false).showGizmos = false;
             quest.AddShipJob(transportShip, ShipJobDefOf.Unload);
             QuestUtility.AddQuestTag(ref transportShip.questTags, questTagToAdd);
 
 
-            quest.Letter(LetterDefOf.NegativeEvent, null, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, shuttlePawns, filterDeadPawnsFromLookTargets: false, "[wolfmanShuttleCrashedLetterText]", null, "[wolfmanShuttleCrashedLetterLabel]");
+            quest.Letter(LetterDefOf.NegativeEvent, null, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, sanguophages, filterDeadPawnsFromLookTargets: false, "[wolfmanShuttleCrashedLetterText]", null, "[wolfmanShuttleCrashedLetterLabel]");
             quest.AddShipJob_Arrive(transportShip, map.Parent, null, shuttleCrashPosition, ShipJobStartMode.Force_DelayCurrent, faction);
-            quest.DefendPoint(map.Parent, pawn,shuttleCrashPosition, shuttlePawns, faction, null, null, 5f);
-
-
-
-
-            
+            quest.DefendPoint(map.Parent, pawn,shuttleCrashPosition, sanguophages, faction, null, null, 5f);
+      
 
             string text = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.TookDamageFromPlayer");
             string text2 = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Arrested");
             string text3 = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Killed");
-            string inSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.LeftMap");
+            string leftMapSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.LeftMap");
             quest.AnySignal(new string[3] { text,text2,text3 }, delegate
             {
 
-                quest.Letter(LetterDefOf.NegativeEvent, null, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, shuttlePawns, filterDeadPawnsFromLookTargets: false, "[letterTextBeggarsBetrayed]", null, "[letterLabelBeggarsBetrayed]");
+                quest.Letter(LetterDefOf.NegativeEvent, null, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, sanguophages, filterDeadPawnsFromLookTargets: false, "[letterTextBeggarsBetrayed]", null, "[letterLabelBeggarsBetrayed]");
                 QuestPart_FactionRelationChange part = new QuestPart_FactionRelationChange
                 {
                     faction = faction,
@@ -111,21 +108,32 @@ namespace VanillaRacesExpandedLycanthrope
                 quest.End(QuestEndOutcome.Fail, 0, null, null);
 
             });
-            
+            quest.AnySignal(new string[1] { leftMapSignal }, delegate
+            {
+                RewardsGeneratorParams parms = new RewardsGeneratorParams
+                {
+                    rewardValue = 1000,
+                    thingRewardRequired = true,
+                    allowXenogermReimplantation = true
+                };
+                QuestGen_Rewards.GiveRewards(asker: pawn, overridePopulationIntent: 0f, quest: quest, parms: parms, inSignal: leftMapSignal, customLetterLabel: null, customLetterText: null, customLetterLabelRules: null, customLetterTextRules: null, useDifficultyFactor: null, runIfChosenPawnSignalUsed: null, variants: num);
+
+            });
 
             quest.Delay(30000, delegate
             {
                 
              
-                quest.Leave(shuttlePawns, null, sendStandardLetter: false, leaveOnCleanup: false);
+                quest.Leave(sanguophages, null, sendStandardLetter: false, leaveOnCleanup: false);
               
 
             }, null);
 
-            quest.AllPawnsDespawned(shuttlePawns, delegate
+           quest.AllPawnsDespawned(sanguophages, delegate
             {
+               
                 QuestGen_End.End(quest, QuestEndOutcome.Success);
-            }, null, inSignal);
+            }, null, leftMapSignal);
 
 
         }
