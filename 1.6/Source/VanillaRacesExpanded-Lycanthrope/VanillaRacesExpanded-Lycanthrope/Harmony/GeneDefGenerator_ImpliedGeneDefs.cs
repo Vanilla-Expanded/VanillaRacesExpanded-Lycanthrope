@@ -67,6 +67,7 @@ namespace VanillaRacesExpandedLycanthrope
                 displayOrderInCategory = displayOrderBase + template.displayOrderOffset,
                 minAgeActive = template.minAgeActive,
                 modContentPack = template.modContentPack,
+                canGenerateInGeneSet = false,
                 modExtensions = new List<DefModExtension> {
                     new VEF.Genes.GeneExtension {
                         backgroundPathArchite = "UI/Icons/Genes/GeneBackground_MorphGene"
