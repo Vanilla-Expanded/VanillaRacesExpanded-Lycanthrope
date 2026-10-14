@@ -12,11 +12,7 @@ namespace VanillaRacesExpandedLycanthrope
     {
         private const string QuestTag = "VRE_WolfmenTransport";
 
-        private const int TicksToShuttleArrival = 180;
-
-        private const int TicksToReinforcements = 10000;
-
-        private const int TicksToBeginAssault = 5000;
+        private const int TicksBeforeWolfmenLeave = 10000;
 
         private static readonly SimpleCurve PointsToThrallCountCurve = new SimpleCurve
     {
@@ -48,9 +44,9 @@ namespace VanillaRacesExpandedLycanthrope
 
             string questTagToAdd = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("VRE_WolfmenTransport");
             string attackedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.TookDamageFromPlayer");
-            string defendTimeoutSignal = QuestGen.GenerateNewSignal("DefendTimeout");
-            string beginAssaultSignal = QuestGen.GenerateNewSignal("BeginAssault");
-            string assaultBeganSignal = QuestGen.GenerateNewSignal("AssaultBegan");
+            string arrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Arrested");
+            string killedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Killed");
+            string shuttleSpawnedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Spawned");
             slate.Set("map", map);
             List<FactionRelation> list = new List<FactionRelation>();
             foreach (Faction item3 in Find.FactionManager.AllFactionsListForReading)
@@ -61,42 +57,41 @@ namespace VanillaRacesExpandedLycanthrope
             faction.temporary = true;
             Find.FactionManager.Add(faction);
             quest.ReserveFaction(faction);
-            List<Pawn> sanguophages = new List<Pawn>();
+            List<Pawn> shuttlePawns = new List<Pawn>();
             Pawn pawn = quest.GeneratePawn(new PawnGenerationRequest(InternalDefOf.VRE_WolfmenPawnKindDef, faction, PawnGenerationContext.NonPlayer, -1, forceGenerateNewPawn: true, allowDead: false, allowDowned: false, canGeneratePawnRelations: true, mustBeCapableOfViolence: true, 1f, forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowPregnant: true));
             pawn.health.forceDowned = true;
-            sanguophages.Add(pawn);
+            shuttlePawns.Add(pawn);
             slate.Set("lycan", pawn);
             int num = Mathf.RoundToInt(PointsToThrallCountCurve.Evaluate(x));
             PawnGenerationRequest request = new PawnGenerationRequest(InternalDefOf.VRE_WolfmenPawnKindDef, faction, PawnGenerationContext.NonPlayer, -1, forceGenerateNewPawn: true, allowDead: false, allowDowned: false, canGeneratePawnRelations: true, mustBeCapableOfViolence: true, 1f, forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowPregnant: true);
             for (int i = 0; i < num; i++)
             {
                 Pawn item = quest.GeneratePawn(request);
-                sanguophages.Add(item);
+                shuttlePawns.Add(item);
             }
             slate.Set("WolfmenCount", num);
-            slate.Set("sanguophages", sanguophages);
+            slate.Set("shuttlePawns", shuttlePawns);
             Thing thing = ThingMaker.MakeThing(ThingDefOf.ShuttleCrashed_Exitable);
+            slate.Set("shuttle", thing);
+            string shuttleTargetTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("shuttle");
+            QuestUtility.AddQuestTag(ref thing.questTags, shuttleTargetTag);
             quest.SetFaction(Gen.YieldSingle(thing), faction);
             TryFindShuttleCrashPosition(map, thing.def.size, out var shuttleCrashPosition);
-            TransportShip transportShip = quest.GenerateTransportShip(TransportShipDefOf.Ship_ShuttleCrashing, sanguophages, thing).transportShip;
+            TransportShip transportShip = quest.GenerateTransportShip(TransportShipDefOf.Ship_ShuttleCrashing, shuttlePawns, thing).transportShip;
             quest.AddShipJob_WaitTime(transportShip, 60, leaveImmediatelyWhenSatisfied: false).showGizmos = false;
             quest.AddShipJob(transportShip, ShipJobDefOf.Unload);
             QuestUtility.AddQuestTag(ref transportShip.questTags, questTagToAdd);
 
 
-            quest.Letter(LetterDefOf.NegativeEvent, null, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, sanguophages, filterDeadPawnsFromLookTargets: false, "[wolfmanShuttleCrashedLetterText]", null, "[wolfmanShuttleCrashedLetterLabel]");
+            quest.Letter(LetterDefOf.NegativeEvent, shuttleSpawnedSignal, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, shuttlePawns, filterDeadPawnsFromLookTargets: false, "[wolfmanShuttleCrashedLetterText]", null, "[wolfmanShuttleCrashedLetterLabel]");
             quest.AddShipJob_Arrive(transportShip, map.Parent, null, shuttleCrashPosition, ShipJobStartMode.Force_DelayCurrent, faction);
-            quest.DefendPoint(map.Parent, pawn,shuttleCrashPosition, sanguophages, faction, null, null, 5f);
+            quest.DefendPoint(map.Parent, pawn, shuttleCrashPosition, shuttlePawns, faction, null, null, 5f);
       
 
-            string text = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.TookDamageFromPlayer");
-            string text2 = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Arrested");
-            string text3 = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Killed");
-            string leftMapSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.LeftMap");
-            quest.AnySignal(new string[3] { text,text2,text3 }, delegate
+            quest.AnySignal(new string[3] { attackedSignal, arrestedSignal, killedSignal }, delegate
             {
 
-                quest.Letter(LetterDefOf.NegativeEvent, null, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, sanguophages, filterDeadPawnsFromLookTargets: false, "[letterTextBeggarsBetrayed]", null, "[letterLabelBeggarsBetrayed]");
+                quest.Letter(LetterDefOf.NegativeEvent, null, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, shuttlePawns, filterDeadPawnsFromLookTargets: false, "[letterTextBeggarsBetrayed]", null, "[letterLabelBeggarsBetrayed]");
                 QuestPart_FactionRelationChange part = new QuestPart_FactionRelationChange
                 {
                     faction = faction,
@@ -108,32 +103,41 @@ namespace VanillaRacesExpandedLycanthrope
                 quest.End(QuestEndOutcome.Fail, 0, null, null);
 
             });
-            quest.AnySignal(new string[1] { leftMapSignal }, delegate
+            RewardsGeneratorParams rewardParams = new RewardsGeneratorParams
             {
-                RewardsGeneratorParams parms = new RewardsGeneratorParams
-                {
-                    rewardValue = 1000,
-                    thingRewardRequired = true,
-                    allowXenogermReimplantation = true
-                };
-                QuestGen_Rewards.GiveRewards(asker: pawn, overridePopulationIntent: 0f, quest: quest, parms: parms, inSignal: leftMapSignal, customLetterLabel: null, customLetterText: null, customLetterLabelRules: null, customLetterTextRules: null, useDifficultyFactor: null, runIfChosenPawnSignalUsed: null, variants: num);
+                rewardValue = 1000,
+                thingRewardRequired = true,
+                allowXenogermReimplantation = true
+            };
+            QuestGen_Rewards.GiveRewards(
+                asker: pawn,
+                overridePopulationIntent: 0f,
+                quest: quest,
+                parms: rewardParams,
+                inSignal: shuttleSpawnedSignal,
+                customLetterLabel: null,
+                customLetterText: null,
+                customLetterLabelRules: null,
+                customLetterTextRules: null,
+                useDifficultyFactor: null,
+                runIfChosenPawnSignalUsed: null,
+                variants: 1);
 
-            });
-
-            quest.Delay(30000, delegate
+            string departureSignal = QuestGen.GenerateNewSignal("WolfmenDepart");
+            QuestPart_Delay departureDelay = new QuestPart_Delay
             {
-                
-             
-                quest.Leave(sanguophages, null, sendStandardLetter: false, leaveOnCleanup: false);
-              
+                delayTicks = TicksBeforeWolfmenLeave,
+                inSignalEnable = shuttleSpawnedSignal
+            };
+            departureDelay.outSignalsCompleted.Add(departureSignal);
+            quest.AddPart(departureDelay);
+            quest.Leave(shuttlePawns, departureSignal, sendStandardLetter: false, leaveOnCleanup: false);
 
-            }, null);
-
-           quest.AllPawnsDespawned(sanguophages, delegate
+            string allPawnsLeftSignal = QuestGen.GenerateNewSignal("WolfmenAllLeft");
+            quest.AllPawnsDespawned(shuttlePawns, delegate
             {
-               
                 QuestGen_End.End(quest, QuestEndOutcome.Success);
-            }, null, leftMapSignal);
+            }, null, allPawnsLeftSignal);
 
 
         }
@@ -146,7 +150,11 @@ namespace VanillaRacesExpandedLycanthrope
                 return false;
             }
 
-
+            int hour = GenLocalDate.HourInteger(map);
+            if (hour < 6 || hour >= 18)
+            {
+                return false;
+            }
 
             if (!TryFindShuttleCrashPosition(map, ThingDefOf.ShuttleCrashed.size, out var _))
             {
