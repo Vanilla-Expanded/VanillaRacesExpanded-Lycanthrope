@@ -46,6 +46,7 @@ namespace VanillaRacesExpandedLycanthrope
             string attackedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.TookDamageFromPlayer");
             string arrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Arrested");
             string killedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Killed");
+            string leftMapSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns." + QuestUtility.QuestTargetSignalPart_LeftMap);
             string shuttleSpawnedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Spawned");
             string wolfmanLeaderTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("wolfmanLeader");
             string reimplantedSignal = QuestGenUtility.HardcodedSignalWithQuestID("wolfmanLeader.XenogermReimplanted");
@@ -120,11 +121,10 @@ namespace VanillaRacesExpandedLycanthrope
                 quest.Leave(shuttlePawns, departureSignal, sendStandardLetter: false, leaveOnCleanup: false);
             }, shuttleSpawnedSignal, outSignalComplete: departureSignal);
 
-            string allPawnsLeftSignal = QuestGen.GenerateNewSignal("WolfmenAllLeft");
             quest.AllPawnsDespawned(shuttlePawns, delegate
             {
-                QuestGen_End.End(quest, QuestEndOutcome.Success);
-            }, null, allPawnsLeftSignal);
+                quest.End(QuestEndOutcome.Success, sendStandardLetter: false);
+            }, inSignal: leftMapSignal);
 
 
         }
