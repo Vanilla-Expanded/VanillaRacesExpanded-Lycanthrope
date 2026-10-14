@@ -30,7 +30,7 @@
     </questNameRules>
     <questDescriptionRules>
       <rulesStrings>
-        <li>questDescription->You have intercepted a distress signal! A shuttle carrying a group of wolfmen refugees is having trouble with staying airborne. Their leader, alongside [WolfmenCount] other refugees is begging you to allow them to crash near [map_definite]. \n\nOnce the ship has crashed, the refugees will regroup and prepare to leave. Their leader offers to transform one of your colonists into a wolfman. To accept, select a colonist and right-click the leader. The wolfmen will leave 30,000 ticks after landing if nobody accepts. You can also fight or arrest them; if you capture one, you can force them to turn a colonist into a wolfman.\n\n[wolfmenInfo]</li>
+        <li>questDescription->You have intercepted a distress signal! A shuttle carrying a group of wolfmen refugees is having trouble with staying airborne. Their leader, alongside [WolfmenCount] other refugees is begging you to allow them to crash near [map_definite]. \n\nOnce the ship has crashed, the refugees will regroup and prepare to leave. Their leader offers to transform one of your colonists into a wolfman. To accept, select a colonist and right-click the leader. The wolfmen will leave half a day after landing if nobody accepts. You can also fight or arrest them; if you capture one, you can force them to turn a colonist into a wolfman.\n\n[wolfmenInfo]</li>
 
         <li>wolfmenInfo->(*Gray)About wolfmen: Wolfmen have propagated unimpeded throughout colonized space to stake territorial claims and establish packs or larger clans. Their wolfman form has diminished nocturnal abilities, trading many advantages in exchange for being able to share their xenogerm with others. Their lycan form, on the other hand, has nocturnal advantages, improved close combat effectiveness, supernatural speed and regeneration, and an invigorating howl that impedes speech which improves further as more pack members join in.(/Gray)</li>
       </rulesStrings>
@@ -38,7 +38,7 @@
     <questContentRules>
       <rulesStrings>
         <li>wolfmanShuttleCrashedLetterLabel->Crashed shuttle</li>
-        <li>wolfmanShuttleCrashedLetterText->A shuttle containing a wolfman leader and [WolfmenCount] wolfmen refugees has crashed nearby. They will exit the crashed craft and prepare to venture on. The leader is willing to implant their germline into one of your colonists. Select a colonist, then right-click the leader and choose "Accept wolfman transformation". The refugees will leave in 30,000 ticks if nobody accepts.</li>
+        <li>wolfmanShuttleCrashedLetterText->A shuttle containing a wolfman leader and [WolfmenCount] wolfmen refugees has crashed nearby. They will exit the crashed craft and prepare to venture on. The leader is willing to implant their germline into one of your colonists. Select a colonist, then right-click the leader and choose "Accept wolfman transformation". The refugees will leave in half a day if nobody accepts.</li>
 
         <li>reinforcementsArrivedLetterLabel->Wolfmen reinforcements</li>
         <li>reinforcementsArrivedLetterText->Wolfmen are arriving in drop pods to reinforce the crashed refugees.</li>
