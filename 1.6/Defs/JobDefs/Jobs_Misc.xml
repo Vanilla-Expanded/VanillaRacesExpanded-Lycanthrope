@@ -10,6 +10,13 @@
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
+  <JobDef>
+    <defName>VRE_ReceiveGermline</defName>
+    <driverClass>VanillaRacesExpandedLycanthrope.JobDriver_AbsorbGermline</driverClass>
+    <reportString>receiving germline from TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
  
   
 </Defs>

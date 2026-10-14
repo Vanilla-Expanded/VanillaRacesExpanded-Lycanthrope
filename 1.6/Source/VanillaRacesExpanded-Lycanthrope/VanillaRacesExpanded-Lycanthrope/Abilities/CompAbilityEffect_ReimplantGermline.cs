@@ -243,6 +243,11 @@ namespace VanillaRacesExpandedLycanthrope
             }
         }
 
+        public static void GiveVoluntaryReimplantJob(Pawn recipient, Pawn source)
+        {
+            recipient.jobs.TryTakeOrderedJob(JobMaker.MakeJob(InternalDefOf.VRE_ReceiveGermline, source), JobTag.Misc);
+        }
+
 
         public static bool CanAbsorbGermline(Pawn pawn)
         {

@@ -12,7 +12,7 @@ namespace VanillaRacesExpandedLycanthrope
     {
         private const string QuestTag = "VRE_WolfmenTransport";
 
-        private const int TicksBeforeWolfmenLeave = 10000;
+        private const int TicksBeforeWolfmenLeave = 30000;
 
         private static readonly SimpleCurve PointsToThrallCountCurve = new SimpleCurve
     {
@@ -47,6 +47,9 @@ namespace VanillaRacesExpandedLycanthrope
             string arrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Arrested");
             string killedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttlePawns.Killed");
             string shuttleSpawnedSignal = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Spawned");
+            string wolfmanLeaderTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("wolfmanLeader");
+            string reimplantedSignal = QuestGenUtility.HardcodedSignalWithQuestID("wolfmanLeader.XenogermReimplanted");
+            string departureSignal = QuestGen.GenerateNewSignal("WolfmenDepart");
             slate.Set("map", map);
             List<FactionRelation> list = new List<FactionRelation>();
             foreach (Faction item3 in Find.FactionManager.AllFactionsListForReading)
@@ -59,8 +62,8 @@ namespace VanillaRacesExpandedLycanthrope
             quest.ReserveFaction(faction);
             List<Pawn> shuttlePawns = new List<Pawn>();
             Pawn pawn = quest.GeneratePawn(new PawnGenerationRequest(InternalDefOf.VRE_WolfmenPawnKindDef, faction, PawnGenerationContext.NonPlayer, -1, forceGenerateNewPawn: true, allowDead: false, allowDowned: false, canGeneratePawnRelations: true, mustBeCapableOfViolence: true, 1f, forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowPregnant: true));
-            pawn.health.forceDowned = true;
             shuttlePawns.Add(pawn);
+            QuestUtility.AddQuestTag(ref pawn.questTags, wolfmanLeaderTag);
             slate.Set("lycan", pawn);
             int num = Mathf.RoundToInt(PointsToThrallCountCurve.Evaluate(x));
             PawnGenerationRequest request = new PawnGenerationRequest(InternalDefOf.VRE_WolfmenPawnKindDef, faction, PawnGenerationContext.NonPlayer, -1, forceGenerateNewPawn: true, allowDead: false, allowDowned: false, canGeneratePawnRelations: true, mustBeCapableOfViolence: true, 1f, forceAddFreeWarmLayerIfNeeded: false, allowGay: true, allowPregnant: true);
@@ -83,7 +86,7 @@ namespace VanillaRacesExpandedLycanthrope
             QuestUtility.AddQuestTag(ref transportShip.questTags, questTagToAdd);
 
 
-            quest.Letter(LetterDefOf.NegativeEvent, shuttleSpawnedSignal, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, shuttlePawns, filterDeadPawnsFromLookTargets: false, "[wolfmanShuttleCrashedLetterText]", null, "[wolfmanShuttleCrashedLetterLabel]");
+            quest.Letter(LetterDefOf.NeutralEvent, shuttleSpawnedSignal, null, null, null, useColonistsFromCaravanArg: false, QuestPart.SignalListenMode.OngoingOnly, shuttlePawns, filterDeadPawnsFromLookTargets: false, "[wolfmanShuttleCrashedLetterText]", null, "[wolfmanShuttleCrashedLetterLabel]");
             quest.AddShipJob_Arrive(transportShip, map.Parent, null, shuttleCrashPosition, ShipJobStartMode.Force_DelayCurrent, faction);
             quest.DefendPoint(map.Parent, pawn, shuttleCrashPosition, shuttlePawns, faction, null, null, 5f);
       
@@ -103,35 +106,19 @@ namespace VanillaRacesExpandedLycanthrope
                 quest.End(QuestEndOutcome.Fail, 0, null, null);
 
             });
-            RewardsGeneratorParams rewardParams = new RewardsGeneratorParams
+            quest.AddPart(new QuestPart_WolfmanConversionOffer
             {
-                rewardValue = 1000,
-                thingRewardRequired = true,
-                allowXenogermReimplantation = true
-            };
-            QuestGen_Rewards.GiveRewards(
-                asker: pawn,
-                overridePopulationIntent: 0f,
-                quest: quest,
-                parms: rewardParams,
-                inSignal: shuttleSpawnedSignal,
-                customLetterLabel: null,
-                customLetterText: null,
-                customLetterLabelRules: null,
-                customLetterTextRules: null,
-                useDifficultyFactor: null,
-                runIfChosenPawnSignalUsed: null,
-                variants: 1);
-
-            string departureSignal = QuestGen.GenerateNewSignal("WolfmenDepart");
-            QuestPart_Delay departureDelay = new QuestPart_Delay
+                leader = pawn,
+                offerStartSignal = shuttleSpawnedSignal,
+                offerEndSignal = reimplantedSignal,
+                offerTimeoutSignal = departureSignal,
+                signalListenMode = QuestPart.SignalListenMode.OngoingOnly
+            });
+            quest.Leave(shuttlePawns, reimplantedSignal, sendStandardLetter: false, leaveOnCleanup: false);
+            quest.Delay(TicksBeforeWolfmenLeave, delegate
             {
-                delayTicks = TicksBeforeWolfmenLeave,
-                inSignalEnable = shuttleSpawnedSignal
-            };
-            departureDelay.outSignalsCompleted.Add(departureSignal);
-            quest.AddPart(departureDelay);
-            quest.Leave(shuttlePawns, departureSignal, sendStandardLetter: false, leaveOnCleanup: false);
+                quest.Leave(shuttlePawns, departureSignal, sendStandardLetter: false, leaveOnCleanup: false);
+            }, shuttleSpawnedSignal, outSignalComplete: departureSignal);
 
             string allPawnsLeftSignal = QuestGen.GenerateNewSignal("WolfmenAllLeft");
             quest.AllPawnsDespawned(shuttlePawns, delegate

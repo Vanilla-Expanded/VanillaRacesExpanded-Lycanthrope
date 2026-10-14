@@ -25,7 +25,7 @@ namespace VanillaRacesExpandedLycanthrope
                 yield return Toils_General.WaitWith(TargetIndex.A, TicksToAbsorb, useProgressBar: true);
                 yield return Toils_General.Do(delegate
                 {
-                    if (Target.HomeFaction != null && pawn.Faction == Faction.OfPlayer)
+                    if (job.def == InternalDefOf.VRE_AbsorbGermline && Target.HomeFaction != null && pawn.Faction == Faction.OfPlayer)
                     {
                         Faction.OfPlayer.TryAffectGoodwillWith(Target.HomeFaction, -50, canSendMessage: true, !Target.HomeFaction.temporary, HistoryEventDefOf.AbsorbedXenogerm);
                     }

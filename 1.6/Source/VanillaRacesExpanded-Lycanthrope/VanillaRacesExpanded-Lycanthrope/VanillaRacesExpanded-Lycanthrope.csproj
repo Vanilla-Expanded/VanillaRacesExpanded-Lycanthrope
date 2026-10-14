@@ -325,6 +325,7 @@
     <Compile Include="PawnRelationWorkers\PawnRelationWorker_PackMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestNodes\QuestNode_Root_LycanShip.cs" />
+    <Compile Include="QuestNodes\WolfmanConversionOffer.cs" />
     <Compile Include="ReflectionCache\ReflectionCache.cs" />
     <Compile Include="Settings\VanillaRacesExpandedLycanthrope_Settings.cs" />
     <Compile Include="Settings\VanillaRacesExpandedLycanthrope_settingsController.cs" />

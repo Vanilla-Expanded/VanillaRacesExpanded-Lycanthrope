@@ -43,6 +43,7 @@ namespace VanillaRacesExpandedLycanthrope
         public static PawnKindDef VRE_WolfmenPawnKindDef;
 
         public static JobDef VRE_AbsorbGermline;
+        public static JobDef VRE_ReceiveGermline;
 
         static InternalDefOf()
         {
